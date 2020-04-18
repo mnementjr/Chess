@@ -11,8 +11,12 @@ public:
     int getID();         // ПОЛУЧАЕМ ID, ТАК КАК ОН PRIVATE
     QPushButton *getButton(); // ПОЛУЧАЕМ КНОПКУ, ТАК КАК ОНА В PRIVATE
     void setText(QString text); // ТЕСТОВЫЙ МЕТОД, КОТОРЫЙ УСТАНАВЛИВАЕТ ТЕКСТ НА КНОПКЕ
+    void setImage(QString path, QString nameImage);
+    bool isPeach();
+    bool isMaroon();
 private:
     int ID;   // ЧТОБ МОЖНО БЫЛО НАЙТИ КНОПКУ
+    QString nameImage;
     QPushButton *button;  // САМА КНОПКА
 };
 
