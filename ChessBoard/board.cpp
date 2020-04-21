@@ -10,7 +10,7 @@ Board::Board(QWidget *parent) : QWidget(parent) {
     // РЕАЛИЗАЦИЯ КОНСТРУКТАРА
 
     int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ АЙДИ ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
-    int conf = 1;    // ПАРАМЕТР. НУЖЕН ДЛЯ ТОГО, ЧТОБЫ ЧЕРЕДОВАЛИСЬ ЦВЕТА
+    int colorConfiguration = 1;    // ПАРАМЕТР. НУЖЕН ДЛЯ ТОГО, ЧТОБЫ ЧЕРЕДОВАЛИСЬ ЦВЕТА
 
     QGridLayout *layout = new QGridLayout(this); // СОЗДАНИЕ ОБЛАСТИ, В КОТОРОЙ БУДУТ КНОПКИ
     layout->setHorizontalSpacing(0);    // УСТАНОВКА ОТСТУПОВ МЕЖДУ КНОПКАМИ
@@ -21,7 +21,7 @@ Board::Board(QWidget *parent) : QWidget(parent) {
         for (int n = 0; n < 8; n++) {
             QString path;            // СЮДА УСТАНОВИТСЯ ПУТЬ ДО ИЗОБРАЖЕНИЯ
             QString nameImage;       // СЮДА УСТАНОВИТСЯ НАЗВАНИЕ ФИГУРЫ, ЧТОБ ПОТОМ ЕЕ МОЖНО БЫЛО ИНДЕНТИФИЦИРОВАТЬ
-            if(conf % 2 == 1){
+            if(colorConfiguration % 2 == 1){
                 if(ID % 2 == 0){
                     path = maroon;
                     nameImage = "maroon";
@@ -45,7 +45,7 @@ Board::Board(QWidget *parent) : QWidget(parent) {
             layout->addWidget(cells[i][n]->getButton(), i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
             ID++;
         }
-        conf++;
+        colorConfiguration++;
     }
 
     for (int i = 0; i < SIZE; i++) {        // ЦИКЛ, В КОТОРОМ ПОЛЕ ЗАПОЛНЯЕТСЯ ФИГУРАМИ
@@ -106,7 +106,24 @@ Board::Board(QWidget *parent) : QWidget(parent) {
                     cells[i][n]->setImage(black_knight_maroon, "black_knight_maroon");
                 }
             }
-            // ДАЛЬШЕ САМИ
+
+            // БЕЛЫЕ СЛОН
+            if(cells[i][n]->getID() == 59 or cells[i][n]->getID() == 62){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(white_bishop_peach, "white_bishop_peach");
+                } else {
+                    cells[i][n]->setImage(white_bishop_maroon, "white_bishop_maroon");
+                }
+            }
+            // ЧЕРНЫЕ
+            if(cells[i][n]->getID() == 3 or cells[i][n]->getID() == 6){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(black_bishop_peach, "black_bishop_peach");
+                } else {
+                    cells[i][n]->setImage(black_bishop_maroon, "black_bishop_maroon");
+                }
+            }
+
 
         }
     }

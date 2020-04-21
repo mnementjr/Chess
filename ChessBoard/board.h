@@ -45,7 +45,11 @@ private:
     QString black_knight_maroon = QDir::currentPath() + "/images/black/knight_maroon.jpg";
     QString black_knight_peach = QDir::currentPath() + "/images/black/knight_peach.jpg";
 
-    // ДАЛЬШЕ САМИ
+    // CЛОН
+    QString white_bishop_maroon = QDir::currentPath() + "/images/white/bishop_maroon.jpg";
+    QString white_bishop_peach = QDir::currentPath() + "/images/white/bishop_peach.jpg";
+    QString black_bishop_maroon = QDir::currentPath() + "/images/black/bishop_maroon.jpg";
+    QString black_bishop_peach = QDir::currentPath() + "/images/black/bishop_peach.jpg";
 };
 
 #endif // BOARD_H
