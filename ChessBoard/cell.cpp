@@ -23,12 +23,69 @@ void Cell::setImage(QString path, QString nameImage){         // УСТАНАВ�
     QIcon icon(path);
     button->setIcon(icon);
     //button->setText(QString::number(ID));
+
+}
+QString Cell::getNameImage(){
+    return nameImage;
 }
 bool Cell::isPeach(){                       // ЕСЛИ КОНПКА ЦВЕТА PEACH, ТО TRUE, ИНАЧЕ FALSE
-    if(nameImage == "peach") return true;
-    return false;
+    if(nameImage == "peach"){
+        return true;
+    }
+    else if(nameImage == "white_pawn_peach"){
+        return  true;
+    }
+    else if(nameImage == "black_pawn_peach"){
+    return  true;
+    }
+    else if(nameImage == "white_rook_peach"){
+        return true;
+    }
+    else if(nameImage == "black_rook_peach"){
+        return true;
+    }
+    else if(nameImage == "white_knight_peach"){
+        return true;
+    }
+    else if(nameImage == "black_knight_peach"){
+        return true;
+    }
+    else if(nameImage == "white_bishop_peach"){
+        return true;
+    }
+    else if(nameImage == "black_bishop_peach"){
+        return true;
+    }
+    else return false;
 }
 bool Cell::isMaroon(){                     // ЕСЛИ КОНПКА ЦВЕТА MAROON, ТО TRUE, ИНАЧЕ FALSE
-    if(nameImage == "maroon") return true;
-    return false;
+    if(nameImage == "maroon"){
+        return true;
+    }
+    else if(nameImage == "maroon_pawn_peach"){
+        return  true;
+    }
+    else if(nameImage == "maroon_pawn_peach"){
+    return  true;
+    }
+    else if(nameImage == "maroon_rook_peach"){
+        return true;
+    }
+    else if(nameImage == "maroon_rook_peach"){
+        return true;
+    }
+    else if(nameImage == "maroon_knight_peach"){
+        return true;
+    }
+    else if(nameImage == "maroon_knight_peach"){
+        return true;
+    }
+    else if(nameImage == "maroon_bishop_peach"){
+        return true;
+    }
+    else if(nameImage == "maroon_bishop_peach"){
+        return true;
+    }
+    else return false;
 }
+

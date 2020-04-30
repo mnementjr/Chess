@@ -11,10 +11,10 @@ int main(int argc, char *argv[])
         window.resize(800, 600);
         window.setWindowTitle("Chess");  // НАЗВАНИЕ ПРОГРАММЫ
         window.setMinimumSize(QSize(512, 512));
-        Board board(&window);       // СОЗДАНИЕ ДОСКИ
-        board.setMaximumSize(QSize(512, 512));
-        board.setMinimumSize(QSize(512, 512));
-
+        QWidget field(&window);
+        field.setMaximumSize(QSize(512, 512));
+        field.setMinimumSize(QSize(512, 512));
+        MainWindow board(&field);       // СОЗДАНИЕ ДОСКИ
         QLabel qlabel(&window);
         qlabel.setGeometry(600, 100, 300, 200);
         qlabel.setText(QDir::currentPath() + "\nСюда нужно поместить папки с фото");

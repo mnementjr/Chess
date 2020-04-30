@@ -5,7 +5,6 @@
 #include <QString>
 
 class Cell : public QWidget {
-
 public:
     Cell(QWidget *parent = 0, int ID = 0);  // КОНСТРУКТОР
     int getID();         // ПОЛУЧАЕМ ID, ТАК КАК ОН PRIVATE
@@ -14,6 +13,7 @@ public:
     void setImage(QString path, QString nameImage);
     bool isPeach();
     bool isMaroon();
+    QString getNameImage();
 private:
     int ID;   // ЧТОБ МОЖНО БЫЛО НАЙТИ КНОПКУ
     QString nameImage;
