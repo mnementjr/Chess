@@ -17,11 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     cell.cpp \
+    container.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     cell.h \
+    container.h \
     mainwindow.h
 
 FORMS += \

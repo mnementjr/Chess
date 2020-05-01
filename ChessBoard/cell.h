@@ -13,6 +13,9 @@ public:
     void setImage(QString path, QString nameImage);
     bool isPeach();
     bool isMaroon();
+    bool isFigureBlack();
+    bool isFigureWhite();
+    bool hasFigure();
     QString getNameImage();
 private:
     int ID;   // ЧТОБ МОЖНО БЫЛО НАЙТИ КНОПКУ

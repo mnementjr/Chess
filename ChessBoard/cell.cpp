@@ -12,7 +12,7 @@ Cell::Cell(QWidget *parent,int ID) : QWidget(parent){
 int Cell::getID(){            // ВОЗВРАЩАЕТ ID КНОПКИ
     return ID;
 }
-QPushButton *Cell::getButton(){          // ТУТ НУЖЕН УКАЗАТЕЛЬ (ТОЖЕ НЕ ЗНАЮ ЗАЧЕМ)
+QPushButton *Cell::getButton(){          // ТУТ НУЖЕН УКАЗАТЕЛЬ (ТОЖЕ НЕ ЗНАЮ ЗАЧЕМ, ТЕПЕРЬ ЗНАЮ)
     return button;
 }
 void Cell::setText(QString text){          // ДЛЯ ОТЛАДКИ (НЕ НУЖНО)
@@ -88,4 +88,33 @@ bool Cell::isMaroon(){                     // ЕСЛИ КОНПКА ЦВЕТА M
     }
     else return false;
 }
+bool Cell::hasFigure(){                     // ЕСЛИ НА КНОПКЕ ЕСТЬ ФИГУРА, ТО TRUE, ИНАЧЕ FALSE
+    if(nameImage == "white_pawn_maroon") return true;
+    else if(nameImage == "white_pawn_peach") return true;
+    else if(nameImage == "black_pawn_maroon") return true;
+    else if(nameImage == "black_pawn_peach") return true;
 
+    else if(nameImage == "white_rook_maroon") return true;
+    else if(nameImage == "white_rook_peach") return true;
+    else if(nameImage == "black_rook_maroon") return true;
+    else if(nameImage == "black_rook_peach") return true;
+
+    else if(nameImage == "white_knight_maroon") return true;
+    else if(nameImage == "white_knight_peach") return true;
+    else if(nameImage == "black_knight_maroon") return true;
+    else if(nameImage == "black_knight_peach") return true;
+
+    else if(nameImage == "white_bishop_maroon") return true;
+    else if(nameImage == "white_bishop_peach") return true;
+    else if(nameImage == "black_bishop_maroon") return true;
+    else if(nameImage == "black_bishop_peach") return true;
+
+    else return false;
+}
+
+bool Cell::isFigureBlack(){
+    return nameImage.contains("black");
+}
+bool Cell::isFigureWhite(){
+    return nameImage.contains("white");
+}

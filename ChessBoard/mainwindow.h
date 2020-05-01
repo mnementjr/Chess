@@ -5,8 +5,10 @@
 #include <QWidget>
 #include <QObject>
 #include <QPushButton>
+#include <QMap>
 #include <QDir>
 #include "cell.h"
+#include "container.h"
 
 // ТУТ НИЧЕГО НЕ ТРОГАЛ
 
@@ -31,13 +33,18 @@ private:
     void clearGreenColors();
     void swapImages(Cell *cell1, Cell *cell2, int configuration = 0);
     void swapFigureColor(Cell *cell);
+    void whitePawnTurn(int i, int n);
+    void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
     QString findPathImage(QString nameImage);
     QString findNameImage(QString path);
 
     const int SIZE = 8;
     bool isGreenHere;
+    bool isDarkGreenHere;
     Cell tempCell;
     QString whichFigureClicked;
+    QVector <Container> DarkGreenMemory;
+    QVector <Container> GreenMemory;
 
     // ЗДЕСЬ ИДЕТ СОЗДАНИЕ ПЕРЕМЕННЫХ, В КОТОРЫХ НАХОДЯТСЯ ПУТИ ДО ИЗОБРАЖЕНИЙ
     // ДЛЯ КАЖДОЙ ФИГУРЫ ДОЛЖНО БЫТЬ ПО 4 ИЗОБРАЖЕНИЯ
@@ -50,6 +57,7 @@ private:
     QString maroon = QDir::currentPath() + "/images/maroon.jpg";  // КЛЕТКА ЦВЕТОМ MAROON
     QString peach = QDir::currentPath() + "/images/peach.jpg";    // КЛЕТКА ЦВЕТОМ PEACH
     QString green = QDir::currentPath() + "/images/green.jpg";    // КЛЕТКА ЦВЕТОМ GREEN
+    QString dark_green = QDir::currentPath() + "/images/darkGreen.jpg";    // КЛЕТКА ЦВЕТОМ DARK GREEN
 
     // ПЕШКА
     QString white_pawn_maroon = QDir::currentPath() + "/images/white/pawn_maroon.jpg";

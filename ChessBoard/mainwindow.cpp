@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     isGreenHere = false;
+    isDarkGreenHere = false;
 
     // РЕАЛИЗАЦИЯ КОНСТРУКТАРА
     int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ АЙДИ ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
@@ -124,10 +125,9 @@ MainWindow::MainWindow(QWidget *parent)
                     cells[i][n]->setImage(black_bishop_maroon, "black_bishop_maroon");
                 }
             }
-
-
         }
     }
+
     connect(cells[0][0]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton1()));
     connect(cells[0][1]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton2()));
     connect(cells[0][2]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton3()));
@@ -211,41 +211,20 @@ void MainWindow::changeImage(int ID){
             if(cells[i][n]->getID() == ID){
                 if(cells[i][n]->getNameImage() == "green" ){
                     if(whichFigureClicked == "white_pawn_peach" || whichFigureClicked == "white_pawn_maroon"){
-                        if(cells[i+1][n]->getNameImage() == "green"){
-                            clearGreenColors();
-                            swapImages(cells[i+2][n], cells[i][n], 1);
-                        }
-                        else {
-                            clearGreenColors();
-                            swapImages(cells[i+1][n], cells[i][n]);
-                        }
+                        whitePawnTurn(i, n);
                     }
-                    isGreenHere = false;
                 }
-                else if(!isGreenHere){
+                else if(isGreenHere || isDarkGreenHere){
+                    clearGreenColors();
+                }
+                else if(!isGreenHere || !isDarkGreenHere){
                     if(cells[i][n]->getNameImage() == "white_pawn_peach"){
                         whichFigureClicked = "white_pawn_peach";
-                        if(ID >= 49 && ID <= 56){
-                            cells[i-1][n]->setImage(green, "green");
-                            cells[i-2][n]->setImage(green, "green");
-                            isGreenHere = true;
-                        }
-                        else {
-                            cells[i-1][n]->setImage(green, "green");
-                            isGreenHere = true;
-                        }
+                        pawnSetGreen(i, n, ID, whichFigureClicked);
                     }
-                    if(cells[i][n]->getNameImage() == "white_pawn_maroon"){
+                    else if(cells[i][n]->getNameImage() == "white_pawn_maroon"){
                         whichFigureClicked = "white_pawn_maroon";
-                        if(ID >= 49 && ID <= 56){
-                            cells[i-1][n]->setImage(green, "green");
-                            cells[i-2][n]->setImage(green, "green");
-                            isGreenHere = true;
-                        }
-                        else {
-                            cells[i-1][n]->setImage(green, "green");
-                            isGreenHere = true;
-                        }
+                        pawnSetGreen(i, n, ID, whichFigureClicked);
                     }
                 }
             }
@@ -274,7 +253,93 @@ void MainWindow::swapImages(Cell *cell1, Cell *cell2, int configuration){
 
 }
 
-void MainWindow:: swapFigureColor(Cell *cell){
+void MainWindow::whitePawnTurn(int i, int n){
+    if(cells[i+1][n]->getNameImage() == "green"){
+        clearGreenColors();
+        swapImages(cells[i+2][n], cells[i][n], 1);
+    }
+    else {
+        clearGreenColors();
+        swapImages(cells[i+1][n], cells[i][n]);
+    }
+    isGreenHere = false;
+}
+void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
+    if(whichFigClicked == "white_pawn_peach"){
+        if(ID >= 49 && ID <= 56){
+            GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
+            GreenMemory.push_back(*new Container(cells[i-2][n]->getNameImage(), cells[i-2][n]->getID()));
+            cells[i-1][n]->setImage(green, "green");
+            cells[i-2][n]->setImage(green, "green");
+            isGreenHere = true;
+        }
+        else {
+            if(i == 0){
+                isGreenHere = false;
+                return; // <------ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+            }
+            if(n > 0){
+                if(cells[i-1][n-1]->hasFigure()){
+                    DarkGreenMemory.push_back(*new Container(cells[i-1][n-1]->getNameImage(), cells[i-1][n-1]->getID()));
+                    cells[i-1][n-1]->setImage(dark_green, "dark_green");
+                    isDarkGreenHere = true;
+                }
+            }
+            if(n < 8){
+                if(cells[i-1][n+1]->hasFigure()){
+                    DarkGreenMemory.push_back(*new Container(cells[i-1][n+1]->getNameImage(), cells[i-1][n+1]->getID()));
+                    cells[i-1][n+1]->setImage(dark_green, "dark_green");
+                    isDarkGreenHere = true;
+                }
+            }
+            if(cells[i-1][n]->hasFigure()){
+                isGreenHere = false;
+                return;
+            }
+            GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
+            cells[i-1][n]->setImage(green, "green");         
+            isGreenHere = true;
+        }
+    }
+    else if(whichFigClicked == "white_pawn_maroon"){
+        if(ID >= 49 && ID <= 56){
+            GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
+            GreenMemory.push_back(*new Container(cells[i-2][n]->getNameImage(), cells[i-2][n]->getID()));
+            cells[i-1][n]->setImage(green, "green");
+            cells[i-2][n]->setImage(green, "green");
+            isGreenHere = true;
+        }
+        else {
+            if(i == 0){
+                isGreenHere = false;
+                return; // <------ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+            }
+            if(n > 0){
+                if(cells[i-1][n-1]->hasFigure()){
+                    DarkGreenMemory.push_back(*new Container(cells[i-1][n-1]->getNameImage(), cells[i-1][n-1]->getID()));
+                    cells[i-1][n-1]->setImage(dark_green, "dark_green");
+                    isDarkGreenHere = true;
+                }
+            }
+            if(n < 8){
+                if(cells[i-1][n+1]->hasFigure()){
+                    DarkGreenMemory.push_back(*new Container(cells[i-1][n+1]->getNameImage(), cells[i-1][n+1]->getID()));
+                    cells[i-1][n+1]->setImage(dark_green, "dark_green");
+                    isDarkGreenHere = true;
+                }
+            }
+            if(cells[i-1][n]->hasFigure()){
+                isGreenHere = false;
+                return;
+            }
+            GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
+            cells[i-1][n]->setImage(green, "green");
+            isGreenHere = true;
+        }
+    }
+    else return;
+}
+void MainWindow::swapFigureColor(Cell *cell){
     if(cell->getNameImage() == "white_pawn_maroon"){
         cell->setImage(white_pawn_peach, "white_pawn_peach");
     }
@@ -350,6 +415,7 @@ QString MainWindow::findNameImage(QString path){
     else if(path == white_bishop_peach) return "white_bishop_peach";
     else if(path == black_bishop_maroon) return "black_bishop_maroon";
     else if(path == black_bishop_peach) return "black_bishop_peach";
+    else return "none";
 }
 
 QString MainWindow::findPathImage(QString nameImage){
@@ -376,40 +442,36 @@ QString MainWindow::findPathImage(QString nameImage){
     else if(nameImage == "white_bishop_peach") return white_bishop_peach;
     else if(nameImage == "black_bishop_maroon") return black_bishop_maroon;
     else if(nameImage == "black_bishop_peach") return black_bishop_peach;
-
+    else return "none";
 }
 
 void MainWindow::clearGreenColors(){
-    for (int i = 0; i < 8; i++) {
-        for (int n = 0; n < 8; n++) {
-            if(cells[i][n]->getNameImage() == "green"){
-                if(i > 0 && i < 7){
-                    if(cells[i-1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
-                }
-                if(n > 0 && n < 7){
-                    if(cells[i][n-1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
-                }
-                if(i == 0){
-                    if(cells[i+1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
-                }
-                if(n == 0){
-                    if(cells[i][n+1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
-                }
-                if(i == 7){
-                    if(cells[i-1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
-                }
-                if(n == 7){
-                    if(cells[i][n-1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
-                    else cells[i][n]->setImage(peach, "peach");
+    for (int j = 0; j < DarkGreenMemory.size(); j++) {
+        int ID = DarkGreenMemory[j].getID();
+        QString nameImage = DarkGreenMemory[j].getNameImage();
+        for (int i = 0; i < 8; i++) {
+            for (int n = 0; n < 8; n++) {
+                if(cells[i][n]->getID() == ID){
+                    cells[i][n]->setImage(findPathImage(nameImage), nameImage);
                 }
             }
         }
     }
+    DarkGreenMemory.clear();
+    for (int j = 0; j < GreenMemory.size(); j++) {
+        int ID = GreenMemory[j].getID();
+        QString nameImage = GreenMemory[j].getNameImage();
+        for (int i = 0; i < 8; i++) {
+            for (int n = 0; n < 8; n++) {
+                if(cells[i][n]->getID() == ID){
+                    cells[i][n]->setImage(findPathImage(nameImage), nameImage);
+                }
+            }
+        }
+    }
+    GreenMemory.clear();
+    isDarkGreenHere = false;
+    isGreenHere = false;
 }
 
 void MainWindow::slotButton1(){
