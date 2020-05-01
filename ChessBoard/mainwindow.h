@@ -28,7 +28,8 @@ private:
     Ui::MainWindow *ui;
     Cell *cells[8][8];     // ПУСТОЙ МАССИВ КЛАССА CELLS В КОТОРОМ ЕСТЬ САМА КНОПКА
 
-    void swapImages(Cell *cell1, Cell *cell2);
+    void clearGreenColors();
+    void swapImages(Cell *cell1, Cell *cell2, int configuration = 0);
     void swapFigureColor(Cell *cell);
     QString findPathImage(QString nameImage);
     QString findNameImage(QString path);
@@ -36,6 +37,7 @@ private:
     const int SIZE = 8;
     bool isGreenHere;
     Cell tempCell;
+    QString whichFigureClicked;
 
     // ЗДЕСЬ ИДЕТ СОЗДАНИЕ ПЕРЕМЕННЫХ, В КОТОРЫХ НАХОДЯТСЯ ПУТИ ДО ИЗОБРАЖЕНИЙ
     // ДЛЯ КАЖДОЙ ФИГУРЫ ДОЛЖНО БЫТЬ ПО 4 ИЗОБРАЖЕНИЯ

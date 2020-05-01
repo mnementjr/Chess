@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "board.h"
 #include <QApplication>
 #include <QDir>
 #include <QLabel>

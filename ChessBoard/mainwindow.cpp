@@ -209,17 +209,43 @@ void MainWindow::changeImage(int ID){
     for (int i = 0; i < 8; i++) {
         for (int n = 0; n < 8; n++) {
             if(cells[i][n]->getID() == ID){
-                if(cells[i][n]->getNameImage() == "green" && isGreenHere){
-                    swapImages(cells[i+1][n], cells[i][n]);
+                if(cells[i][n]->getNameImage() == "green" ){
+                    if(whichFigureClicked == "white_pawn_peach" || whichFigureClicked == "white_pawn_maroon"){
+                        if(cells[i+1][n]->getNameImage() == "green"){
+                            clearGreenColors();
+                            swapImages(cells[i+2][n], cells[i][n], 1);
+                        }
+                        else {
+                            clearGreenColors();
+                            swapImages(cells[i+1][n], cells[i][n]);
+                        }
+                    }
+                    isGreenHere = false;
                 }
-                else {
+                else if(!isGreenHere){
                     if(cells[i][n]->getNameImage() == "white_pawn_peach"){
-                        cells[i-1][n]->setImage(green, "green");
-                        isGreenHere = true;
+                        whichFigureClicked = "white_pawn_peach";
+                        if(ID >= 49 && ID <= 56){
+                            cells[i-1][n]->setImage(green, "green");
+                            cells[i-2][n]->setImage(green, "green");
+                            isGreenHere = true;
+                        }
+                        else {
+                            cells[i-1][n]->setImage(green, "green");
+                            isGreenHere = true;
+                        }
                     }
                     if(cells[i][n]->getNameImage() == "white_pawn_maroon"){
-                        cells[i-1][n]->setImage(green, "green");
-                        isGreenHere = true;
+                        whichFigureClicked = "white_pawn_maroon";
+                        if(ID >= 49 && ID <= 56){
+                            cells[i-1][n]->setImage(green, "green");
+                            cells[i-2][n]->setImage(green, "green");
+                            isGreenHere = true;
+                        }
+                        else {
+                            cells[i-1][n]->setImage(green, "green");
+                            isGreenHere = true;
+                        }
                     }
                 }
             }
@@ -227,15 +253,25 @@ void MainWindow::changeImage(int ID){
     }
 }
 
-void MainWindow::swapImages(Cell *cell1, Cell *cell2){
+void MainWindow::swapImages(Cell *cell1, Cell *cell2, int configuration){
     QString path = findPathImage(cell1->getNameImage());
-    if(cell1->isPeach()){
-        cell1->setImage(peach, "peach");
-    } else {
-        cell1->setImage(maroon, "maroon");
+    if(configuration == 0){
+        if(cell1->isPeach()){
+            cell1->setImage(peach, "peach");
+        } else {
+            cell1->setImage(maroon, "maroon");
+        }
+        cell2->setImage(path, findNameImage(path));
+        swapFigureColor(cell2);
+    } else if(configuration == 1){
+        if(cell1->isPeach()){
+            cell1->setImage(peach, "peach");
+        } else {
+            cell1->setImage(maroon, "maroon");
+        }
+        cell2->setImage(path, findNameImage(path));
     }
-    cell2->setImage(path, findNameImage(path));
-    swapFigureColor(cell2);
+
 }
 
 void MainWindow:: swapFigureColor(Cell *cell){
@@ -343,10 +379,42 @@ QString MainWindow::findPathImage(QString nameImage){
 
 }
 
+void MainWindow::clearGreenColors(){
+    for (int i = 0; i < 8; i++) {
+        for (int n = 0; n < 8; n++) {
+            if(cells[i][n]->getNameImage() == "green"){
+                if(i > 0 && i < 7){
+                    if(cells[i-1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+                if(n > 0 && n < 7){
+                    if(cells[i][n-1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+                if(i == 0){
+                    if(cells[i+1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+                if(n == 0){
+                    if(cells[i][n+1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+                if(i == 7){
+                    if(cells[i-1][n]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+                if(n == 7){
+                    if(cells[i][n-1]->isPeach()) cells[i][n]->setImage(maroon, "maroon");
+                    else cells[i][n]->setImage(peach, "peach");
+                }
+            }
+        }
+    }
+}
+
 void MainWindow::slotButton1(){
     emit signalFromButton(1);
 }
-
 void MainWindow::slotButton2(){
     emit signalFromButton(2);
 }
@@ -497,55 +565,42 @@ void MainWindow::slotButton50(){
 void MainWindow::slotButton51(){
     emit signalFromButton(51);
 }
-
 void MainWindow::slotButton52(){
     emit signalFromButton(52);
 }
-
 void MainWindow::slotButton53(){
     emit signalFromButton(53);
 }
-
 void MainWindow::slotButton54(){
     emit signalFromButton(54);
 }
-
 void MainWindow::slotButton55(){
     emit signalFromButton(55);
 }
-
 void MainWindow::slotButton56(){
     emit signalFromButton(56);
 }
-
 void MainWindow::slotButton57(){
     emit signalFromButton(57);
 }
-
 void MainWindow::slotButton58(){
     emit signalFromButton(58);
 }
-
 void MainWindow::slotButton59(){
     emit signalFromButton(59);
 }
-
 void MainWindow::slotButton60(){
     emit signalFromButton(60);
 }
-
 void MainWindow::slotButton61(){
     emit signalFromButton(61);
 }
-
 void MainWindow::slotButton62(){
     emit signalFromButton(62);
 }
-
 void MainWindow::slotButton63(){
     emit signalFromButton(63);
 }
-
 void MainWindow::slotButton64(){
     emit signalFromButton(64);
 }
