@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 #include <QGridLayout>
 
@@ -213,9 +214,8 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
     for (int i = 0; i < 8; i++) {
         for (int n = 0; n < 8; n++) {
             if(cells[i][n]->getID() == ID){
-                if(cells[i][n]->getNameImage() == "green" ){            // 1. УСЛОВИЕ (УНИВЕРСАЛЬНОЕ)
+                if(cells[i][n]->getNameImage() == "green" || cells[i][n]->getNameImage() == "dark_green" ){            // 1. УСЛОВИЕ (УНИВЕРСАЛЬНОЕ)
                     // ЕСЛИ БЫЛА НАЖАТА ОПРЕДЕЛЕННАЯ ФИГУРА, ТО... (БУДЕМ ДОПИСЫВАТЬ)
-
                     if(whichFigureClicked == "white_pawn_peach" || whichFigureClicked == "white_pawn_maroon"){
                         whitePawnTurn(i, n);
                     }
@@ -227,10 +227,12 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                     // ЕСЛИ ИМЯ ИЗОБРАЖЕНИЯ КЛЕТКИ == "какой-то фигуре". БУДЕМ ДОПИСЫВАТЬ (2 БЛОКА ДЛЯ КАЖДОЙ ФИГУРЫ РАЗНЫХ СТОРОН)
 
                     if(cells[i][n]->getNameImage() == "white_pawn_peach"){  // ЕСЛИ БЕЛАЯ ПЕРСИКОВАЯ ПЕШКА
+                        FigureMemory.push_back(*new Container("white_pawn_peach", cells[i][n]->getID()));  // ТО СОХРАНЯЕМ ЕЕ В ВЕКТОР
                         whichFigureClicked = "white_pawn_peach";
                         pawnSetGreen(i, n, ID, whichFigureClicked);
                     }
                     else if(cells[i][n]->getNameImage() == "white_pawn_maroon"){ // ЕСЛИ БЕЛАЯ КРАСНАЯ ПЕШКА
+                        FigureMemory.push_back(*new Container("white_pawn_maroon", cells[i][n]->getID()));  // ТО СОХРАНЯЕМ ЕЕ В ВЕКТОР
                         whichFigureClicked = "white_pawn_maroon";
                         pawnSetGreen(i, n, ID, whichFigureClicked);
                     }
@@ -247,10 +249,18 @@ void MainWindow::whitePawnTurn(int i, int n){
         clearGreenColors();                             // УБИРАЕМ ВСЕ ЗЕЛЕНЫЕ ЦВЕТА
         swapImages(cells[i+2][n], cells[i][n], 1);      // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 2 КНОПКИ ВВЕРХ
     }
-    else {
+    else if(cells[i][n]->getNameImage() == "dark_green"){
+            clearGreenColors();
+            swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+    }
+    else{
         clearGreenColors();                             // ЕСЛИ ЖЕ НЕТ, ТО...
         swapImages(cells[i+1][n], cells[i][n]);         // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 1 КНОПКУ ВВЕРХ
     }
+    if(cells[i][n]->getID() > 0 && cells[i][n]->getID() < 9){
+        QMessageBox::information(this, "Информация", "Пешка дошла до конца, выберите фигуру!"); // <------ ТУТ БУДЕТ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+    }
+    FigureMemory.clear();          // В КОНЦЕ ТАКОЙ ФУНКЦИИ ПИШЕМ ЭТО ОБЯЗАТЕЛЬНО
 }
 
 // СОЗДАЕМ ЗЕЛЕНЫЕ ЦВЕТА
@@ -269,7 +279,7 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
             if(i == 0){   // ЕСЛИ ДОШЛА ДОВЕРХУ , ТО МЫ НЕ МОЖЕМ ПОСТАВИТЬ ЗЕЛЕНЫЙ ЦВЕТ, ПОТОМУ ЧТО ИДТИ БОЛЬШЕ НЕКУДА
                 isGreenHere = false;  // РАЗ НЕТУ ЗЕЛЕНОГО ЦВЕТА, ТО И isGreenHere СТАВИМ false
                 return; // <------- ВЫХОД ИЗ ФУНКЦИИ
-                // <------ ТУТ БУДЕТ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+
             }
 
             if(n > 0 && n < 7){ // ЕСЛИ ПЕШКА ИДЕТ НИ С КРАЮ СЛЕВА НИ С КРАЮ СПРАВА, ТО...
@@ -478,6 +488,15 @@ void MainWindow::clearGreenColors(){
     isGreenHere = false;
 }
 
+Cell* MainWindow::findCellByID(int ID){
+    for (int i = 0; i < 8; i++) {
+        for (int n = 0; n < 8; n++) {
+            if(cells[i][n]->getID() == ID){
+                return cells[i][n];
+            }
+        }
+    }
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 
