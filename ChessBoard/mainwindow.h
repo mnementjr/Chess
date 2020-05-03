@@ -23,9 +23,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-
-
 private:
     Ui::MainWindow *ui;
     Cell *cells[8][8];     // ПУСТОЙ МАССИВ ОБЪЕКТОВ КЛАССА CELLS, В КОТОРОМ ЕСТЬ САМА КНОПКА
@@ -33,6 +30,7 @@ private:
     //--------------------------------------------------------------------------------------------------------------------
     // МЕТОДЫ, КОТОРЫЕ СВЯЗАНЫ С ХОДАМИ ФИГУР (СЮДА ИХ ДОБАВЛЯТЬ ПРИ РЕАЛИЗАЦИИ НОВЫХ ФИГУР)
     void whitePawnTurn(int i, int n);
+    void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
 
     //--------------------------------------------------------------------------------------------------------------------
@@ -70,7 +68,7 @@ private:
     // 2. ДЛЯ БЕЛЫХ ЦВЕТА PEACH
     // 3. ДЛЯ ЧЕРНЫХ ЦВЕТА MAROON
     // 4. ДЛЯ ЧЕРНЫХ ЦВЕТА PEACH
-    // QDir::currentPath() --- УКАЗЫВАТЬ ОБЯЗАТЕЛЬНО, ОЗНАЧАЕТ, ЧТО МЫ НАХОДИМСЯ В ПАПКЕ, ИЗ КОТОРОЙ БЫЛ ЗАПУЩЕН ПРОЕКТ
+    // QDir::currentPath() --- УКАЗЫВАТЬ ОБЯЗАТЕЛЬНО. ОЗНАЧАЕТ, ЧТО МЫ НАХОДИМСЯ В ПАПКЕ, ИЗ КОТОРОЙ БЫЛ ЗАПУЩЕН ПРОЕКТ
 
     QString maroon = QDir::currentPath() + "/images/maroon.jpg";  // КЛЕТКА ЦВЕТОМ MAROON
     QString peach = QDir::currentPath() + "/images/peach.jpg";    // КЛЕТКА ЦВЕТОМ PEACH

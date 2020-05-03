@@ -219,9 +219,13 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                     if(whichFigureClicked == "white_pawn_peach" || whichFigureClicked == "white_pawn_maroon"){
                         whitePawnTurn(i, n);
                     }
+                    else if(whichFigureClicked == "black_pawn_peach" || whichFigureClicked == "black_pawn_maroon"){
+                        blackPawnTurn(i, n);
+                    }
                 }
                 else if(isGreenHere || isDarkGreenHere){                // 2. УСЛОВИЕ (УНИВЕРСАЛЬНОЕ)
                     clearGreenColors();
+                    FigureMemory.clear();
                 }
                 else if(!isGreenHere || !isDarkGreenHere){              // 3. УСЛОВИЕ (УНИВЕРСАЛЬНОЕ)
                     // ЕСЛИ ИМЯ ИЗОБРАЖЕНИЯ КЛЕТКИ == "какой-то фигуре". БУДЕМ ДОПИСЫВАТЬ (2 БЛОКА ДЛЯ КАЖДОЙ ФИГУРЫ РАЗНЫХ СТОРОН)
@@ -234,6 +238,16 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                     else if(cells[i][n]->getNameImage() == "white_pawn_maroon"){ // ЕСЛИ БЕЛАЯ КРАСНАЯ ПЕШКА
                         FigureMemory.push_back(*new Container("white_pawn_maroon", cells[i][n]->getID()));  // ТО СОХРАНЯЕМ ЕЕ В ВЕКТОР
                         whichFigureClicked = "white_pawn_maroon";
+                        pawnSetGreen(i, n, ID, whichFigureClicked);
+                    }
+                    else if(cells[i][n]->getNameImage() == "black_pawn_peach"){
+                        FigureMemory.push_back(*new Container("black_pawn_peach", cells[i][n]->getID()));
+                        whichFigureClicked = "black_pawn_peach";
+                        pawnSetGreen(i, n, ID, whichFigureClicked);
+                    }
+                    else if(cells[i][n]->getNameImage() == "black_pawn_maroon"){
+                        FigureMemory.push_back(*new Container("black_pawn_maroon", cells[i][n]->getID()));
+                        whichFigureClicked = "black_pawn_maroon";
                         pawnSetGreen(i, n, ID, whichFigureClicked);
                     }
                 }
@@ -262,26 +276,34 @@ void MainWindow::whitePawnTurn(int i, int n){
     }
     FigureMemory.clear();          // В КОНЦЕ ТАКОЙ ФУНКЦИИ ПИШЕМ ЭТО ОБЯЗАТЕЛЬНО
 }
-
-// СОЗДАЕМ ЗЕЛЕНЫЕ ЦВЕТА
+// ПЕРЕМЕЩЕНИЕ ЧЁРНОЙ ПЕШКИ
+void MainWindow::blackPawnTurn(int i, int n){
+    if(cells[i-1][n]->getNameImage() == "green"){       // ЕСЛИ ВЫШЕ ЗЕЛЕНОЙ КНОПКИ ЕСТЬ ЗЕЛЕНАЯ КНОПКА, ТО....
+        clearGreenColors();                             // УБИРАЕМ ВСЕ ЗЕЛЕНЫЕ ЦВЕТА
+        swapImages(cells[i-2][n], cells[i][n], 1);      // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 2 КНОПКИ ВВЕРХ
+    }
+    else if(cells[i][n]->getNameImage() == "dark_green"){
+            clearGreenColors();
+            swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+    }
+    else{
+        clearGreenColors();                             // ЕСЛИ ЖЕ НЕТ, ТО...
+        swapImages(cells[i-1][n], cells[i][n]);         // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 1 КНОПКУ ВВЕРХ
+    }
+    if(cells[i][n]->getID() > 56 && cells[i][n]->getID() < 65){
+        QMessageBox::information(this, "Информация", "Пешка дошла до конца, выберите фигуру!"); // <------ ТУТ БУДЕТ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+    }
+    FigureMemory.clear();          // В КОНЦЕ ТАКОЙ ФУНКЦИИ ПИШЕМ ЭТО ОБЯЗАТЕЛЬНО
+}
+// СОЗДАЕМ ЗЕЛЕНЫЕ ЦВЕТА ДЛЯ ПЕШЕК ДВУХ КОМАНД
 void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
-    if(whichFigClicked == "white_pawn_peach" || whichFigClicked == "white_pawn_maroon"){  // ЕСЛИ БЫЛА НАЖАТА БЕЛАЯ ПЕШКА, ТО....
-        if(ID >= 49 && ID <= 56){    // ЕСЛИ ЭТО ЕЕ ПЕРВОЕ ДВИЖЕНИЕ, ТО ОНА МОЖЕТ ХОДИТЬ НА 2 КЛЕТКИ ВВЕРХ
-            // СОХРАНЯЕМ В GREEN MEMORY ИЗОБРАЖЕНИЯ ТЕХ КНОПОК, КОТОРЫЕ БУДУТ ЗАМЕНЕНЫ НА ЗЕЛЕНЫЙ ЦВЕТ
-            GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
-            GreenMemory.push_back(*new Container(cells[i-2][n]->getNameImage(), cells[i-2][n]->getID()));
-            cells[i-1][n]->setImage(green, "green");     // ТЕПЕРЬ У ЭТИХ КНОПОК СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ
-            cells[i-2][n]->setImage(green, "green");
-            isGreenHere = true;                     // РАЗ МЫ ПОСТАВИЛИ ЗЕЛЕНЫЙ ЦВЕТ, ТО isGreenHere СТАВИМ true
-        }
-        else {               // В ОСТАЛЬНЫХ СЛУЧАЯХ....
+    if(whichFigClicked == "white_pawn_peach" || whichFigClicked == "white_pawn_maroon"){  // ЕСЛИ БЫЛА НАЖАТА БЕЛАЯ ПЕШКА, ТО..
             // ИДУТ ПРОВЕРКИ НА ВЫХОД ЗА ПРЕДЕЛЫ МАССИВА...
             if(i == 0){   // ЕСЛИ ДОШЛА ДОВЕРХУ , ТО МЫ НЕ МОЖЕМ ПОСТАВИТЬ ЗЕЛЕНЫЙ ЦВЕТ, ПОТОМУ ЧТО ИДТИ БОЛЬШЕ НЕКУДА
                 isGreenHere = false;  // РАЗ НЕТУ ЗЕЛЕНОГО ЦВЕТА, ТО И isGreenHere СТАВИМ false
                 return; // <------- ВЫХОД ИЗ ФУНКЦИИ
 
             }
-
             if(n > 0 && n < 7){ // ЕСЛИ ПЕШКА ИДЕТ НИ С КРАЮ СЛЕВА НИ С КРАЮ СПРАВА, ТО...
                 if(cells[i-1][n-1]->hasFigure() && cells[i-1][n-1]->isFigureBlack()){
                     DarkGreenMemory.push_back(*new Container(cells[i-1][n-1]->getNameImage(), cells[i-1][n-1]->getID()));
@@ -308,16 +330,66 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
                     isDarkGreenHere = true;
                 }
             }
-
+            // ПОСЛЕ ЭТОГО
             if(cells[i-1][n]->hasFigure()){     // ЕСЛИ ВПЕРЕДИ ЕСТЬ КАКАЯ-ТО ФИГУРА, ТО....
                 isGreenHere = false;
                 return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
             }
             // ЕСЛИ ДОШЛО ДО СЮДА, ТО ЗНАЧИТ ПЕШКА МОЖЕТ ПОЙТИ НАВЕРХ И СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ СВЕРХУ
+            if(ID >= 49 && ID <= 56 && !cells[i-2][n]->hasFigure()){    // ЕСЛИ ЭТО ЕЕ ПЕРВОЕ ДВИЖЕНИЕ, ТО ОНА МОЖЕТ ХОДИТЬ НА 2 КЛЕТКИ ВВЕРХ
+                // СОХРАНЯЕМ В GREEN MEMORY ИЗОБРАЖЕНИЯ ТЕХ КНОПОК, КОТОРЫЕ БУДУТ ЗАМЕНЕНЫ НА ЗЕЛЕНЫЙ ЦВЕТ
+                GreenMemory.push_back(*new Container(cells[i-2][n]->getNameImage(), cells[i-2][n]->getID()));
+                cells[i-2][n]->setImage(green, "green");  // ТЕПЕРЬ У ЭТИХ КНОПОК СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ                  // РАЗ МЫ ПОСТАВИЛИ ЗЕЛЕНЫЙ ЦВЕТ, ТО isGreenHere СТАВИМ true
+            }
             GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
             cells[i-1][n]->setImage(green, "green");         
             isGreenHere = true;
+    }
+    else if(whichFigClicked == "black_pawn_peach" || whichFigClicked == "black_pawn_maroon"){
+        if(i == 7){
+            isGreenHere = false;
+            return;
         }
+
+        if(n > 0 && n < 7){ // ЕСЛИ ПЕШКА ИДЕТ НИ С КРАЮ СЛЕВА НИ С КРАЮ СПРАВА, ТО...
+            if(cells[i+1][n-1]->hasFigure() && cells[i+1][n-1]->isFigureWhite()){
+                DarkGreenMemory.push_back(*new Container(cells[i+1][n-1]->getNameImage(), cells[i+1][n-1]->getID()));
+                cells[i+1][n-1]->setImage(dark_green, "dark_green");
+                isDarkGreenHere = true;
+            }
+            if(cells[i+1][n+1]->hasFigure() && cells[i+1][n+1]->isFigureWhite()){
+                DarkGreenMemory.push_back(*new Container(cells[i+1][n+1]->getNameImage(), cells[i+1][n+1]->getID()));
+                cells[i+1][n+1]->setImage(dark_green, "dark_green");
+                isDarkGreenHere = true;
+            }
+        }
+        else if (n == 0){   // ЕСЛИ ПЕШКА ИДЕТ С КРАЮ СЛЕВА, ТО.......
+            if(cells[i+1][n+1]->hasFigure() && cells[i+1][n+1]->isFigureWhite()){
+                DarkGreenMemory.push_back(*new Container(cells[i+1][n+1]->getNameImage(), cells[i+1][n+1]->getID()));
+                cells[i+1][n+1]->setImage(dark_green, "dark_green");
+                isDarkGreenHere = true;
+            }
+        }
+        else if (n == 7){    // ЕСЛИ ПЕШКА ИДЕТ С КРАЮ СПРАВА, ТО.....
+            if(cells[i+1][n-1]->hasFigure() && cells[i+1][n-1]->isFigureWhite()){
+                DarkGreenMemory.push_back(*new Container(cells[i+1][n-1]->getNameImage(), cells[i+1][n-1]->getID()));
+                cells[i+1][n-1]->setImage(dark_green, "dark_green");
+                isDarkGreenHere = true;
+            }
+        }
+
+        if(cells[i+1][n]->hasFigure()){     // ЕСЛИ ВПЕРЕДИ ЕСТЬ КАКАЯ-ТО ФИГУРА, ТО....
+            isGreenHere = false;
+            return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
+        }
+        // ЕСЛИ ДОШЛО ДО СЮДА, ТО ЗНАЧИТ ПЕШКА МОЖЕТ ПОЙТИ НАВЕРХ И СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ СВЕРХУ
+        if(ID >= 9 && ID <= 16 && !cells[i+2][n]->hasFigure()){
+            GreenMemory.push_back(*new Container(cells[i+2][n]->getNameImage(), cells[i+2][n]->getID()));
+            cells[i+2][n]->setImage(green, "green");
+        }
+        GreenMemory.push_back(*new Container(cells[i+1][n]->getNameImage(), cells[i+1][n]->getID()));
+        cells[i+1][n]->setImage(green, "green");
+        isGreenHere = true;
     }
     else return;
 }
