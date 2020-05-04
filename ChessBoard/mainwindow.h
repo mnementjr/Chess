@@ -33,8 +33,7 @@ private:
     void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
 
-    void whiteQueenTurn(int i, int n);
-    void blackQueenTurn(int i, int n);
+    void anotherQueenTurn(int i, int n);
     void queenSetGreen(int i, int n, int ID, QString whichFigClicked);
 
     //--------------------------------------------------------------------------------------------------------------------
