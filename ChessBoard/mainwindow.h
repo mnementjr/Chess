@@ -33,6 +33,10 @@ private:
     void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
 
+    void whiteQueenTurn(int i, int n);
+    void blackQueenTurn(int i, int n);
+    void queenSetGreen(int i, int n, int ID, QString whichFigClicked);
+
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
@@ -99,6 +103,18 @@ private:
     QString white_bishop_peach = QDir::currentPath() + "/images/white/bishop_peach.jpg";
     QString black_bishop_maroon = QDir::currentPath() + "/images/black/bishop_maroon.jpg";
     QString black_bishop_peach = QDir::currentPath() + "/images/black/bishop_peach.jpg";
+
+    // КОРОЛЕВА ИЛИ ФЕРЗЬ
+    QString white_queen_maroon = QDir::currentPath() + "/images/white/queen_maroon.jpg";
+    QString white_queen_peach = QDir::currentPath() + "/images/white/queen_peach.jpg";
+    QString black_queen_maroon = QDir::currentPath() + "/images/black/queen_maroon.jpg";
+    QString black_queen_peach = QDir::currentPath() + "/images/black/queen_peach.jpg";
+
+    // КОРОЛЬ
+    QString white_king_maroon = QDir::currentPath() + "/images/white/king_maroon.jpg";
+    QString white_king_peach = QDir::currentPath() + "/images/white/king_peach.jpg";
+    QString black_king_maroon = QDir::currentPath() + "/images/black/king_maroon.jpg";
+    QString black_king_peach = QDir::currentPath() + "/images/black/king_peach.jpg";
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################

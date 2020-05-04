@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
-
 #include <QGridLayout>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -109,8 +108,8 @@ MainWindow::MainWindow(QWidget *parent)
                     cells[i][n]->setImage(black_knight_maroon, "black_knight_maroon");
                 }
             }
-
-            // БЕЛЫЕ СЛОН
+            //--------------------------------СЛОН--------------------------------------
+            // БЕЛЫЕ
             if(cells[i][n]->getID() == 59 or cells[i][n]->getID() == 62){
                 if(cells[i][n]->isPeach()){
                     cells[i][n]->setImage(white_bishop_peach, "white_bishop_peach");
@@ -126,6 +125,41 @@ MainWindow::MainWindow(QWidget *parent)
                     cells[i][n]->setImage(black_bishop_maroon, "black_bishop_maroon");
                 }
             }
+            //--------------------------------КОРОЛЕВА--------------------------------------
+            // БЕЛЫЕ
+            if(cells[i][n]->getID() == 60){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(white_queen_peach, "white_queen_peach");
+                } else {
+                    cells[i][n]->setImage(white_queen_maroon, "white_queen_maroon");
+                }
+            }
+            // ЧЕРНЫЕ
+            if(cells[i][n]->getID() == 4){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(black_queen_peach, "black_queen_peach");
+                } else {
+                    cells[i][n]->setImage(black_queen_maroon, "black_queen_maroon");
+                }
+            }
+            //--------------------------------КОРОЛЬ--------------------------------------
+            // БЕЛЫЕ
+            if(cells[i][n]->getID() == 61){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(white_king_peach, "white_king_peach");
+                } else {
+                    cells[i][n]->setImage(white_king_maroon, "white_king_maroon");
+                }
+            }
+            // ЧЕРНЫЕ
+            if(cells[i][n]->getID() == 5){
+                if(cells[i][n]->isPeach()){
+                    cells[i][n]->setImage(black_king_peach, "black_king_peach");
+                } else {
+                    cells[i][n]->setImage(black_king_maroon, "black_king_maroon");
+                }
+            }
+
         }
     }
 //--------------------------------------------------------------------------------------------------------------------
@@ -395,6 +429,17 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
 }
 
 
+void MainWindow::whiteQueenTurn(int i, int n){
+
+}
+
+void MainWindow::blackQueenTurn(int i, int n){
+
+}
+
+void MainWindow::queenSetGreen(int i, int n, int ID, QString whichFigClicked){
+
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -474,6 +519,31 @@ void MainWindow::swapFigureColor(Cell *cell){
     else if(cell->getNameImage() == "black_bishop_peach"){
         cell->setImage(black_bishop_maroon, "black_bishop_maroon");
     }
+    else if(cell->getNameImage() == "white_king_maroon"){
+        cell->setImage(white_king_peach, "white_king_peach");
+    }
+    else if(cell->getNameImage() == "white_king_peach"){
+        cell->setImage(white_king_maroon, "white_king_maroon");
+    }
+    else if(cell->getNameImage() == "black_king_maroon"){
+        cell->setImage(black_king_peach, "black_king_peach");
+    }
+    else if(cell->getNameImage() == "black_king_peach"){
+        cell->setImage(black_king_maroon, "black_king_maroon");
+    }
+    else if(cell->getNameImage() == "white_queen_maroon"){
+        cell->setImage(white_queen_peach, "white_queen_peach");
+    }
+    else if(cell->getNameImage() == "white_queen_peach"){
+        cell->setImage(white_queen_maroon, "white_queen_maroon");
+    }
+    else if(cell->getNameImage() == "black_queen_maroon"){
+        cell->setImage(black_queen_peach, "black_queen_peach");
+    }
+    else if(cell->getNameImage() == "black_queen_peach"){
+        cell->setImage(black_queen_maroon, "black_queen_maroon");
+    }
+
 
 }
 
@@ -501,6 +571,17 @@ QString MainWindow::findNameImage(QString path){
     else if(path == white_bishop_peach) return "white_bishop_peach";
     else if(path == black_bishop_maroon) return "black_bishop_maroon";
     else if(path == black_bishop_peach) return "black_bishop_peach";
+
+    else if(path == white_king_maroon) return "white_king_maroon";
+    else if(path == white_king_peach) return "white_king_peach";
+    else if(path == black_king_maroon) return "black_king_maroon";
+    else if(path == black_king_peach) return "black_king_peach";
+
+    else if(path == white_queen_maroon) return "white_queen_maroon";
+    else if(path == white_queen_peach) return "white_queen_peach";
+    else if(path == black_queen_maroon) return "black_queen_maroon";
+    else if(path == black_queen_peach) return "black_queen_peach";
+
     else return "none";
 }
 
@@ -528,6 +609,17 @@ QString MainWindow::findPathImage(QString nameImage){
     else if(nameImage == "white_bishop_peach") return white_bishop_peach;
     else if(nameImage == "black_bishop_maroon") return black_bishop_maroon;
     else if(nameImage == "black_bishop_peach") return black_bishop_peach;
+
+    else if(nameImage == "white_king_maroon") return white_king_maroon;
+    else if(nameImage == "white_king_peach") return white_king_peach;
+    else if(nameImage == "black_king_maroon") return black_king_maroon;
+    else if(nameImage == "black_king_peach") return black_king_peach;
+
+    else if(nameImage == "white_queen_maroon") return white_queen_maroon;
+    else if(nameImage == "white_queen_peach") return white_queen_peach;
+    else if(nameImage == "black_queen_maroon") return black_queen_maroon;
+    else if(nameImage == "black_queen_peach") return black_queen_peach;
+
     else return "none";
 }
 
