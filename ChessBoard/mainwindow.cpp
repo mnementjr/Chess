@@ -365,6 +365,8 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
             // ИДУТ ПРОВЕРКИ НА ВЫХОД ЗА ПРЕДЕЛЫ МАССИВА...
             if(i == 0){   // ЕСЛИ ДОШЛА ДОВЕРХУ , ТО МЫ НЕ МОЖЕМ ПОСТАВИТЬ ЗЕЛЕНЫЙ ЦВЕТ, ПОТОМУ ЧТО ИДТИ БОЛЬШЕ НЕКУДА
                 isGreenHere = false;  // РАЗ НЕТУ ЗЕЛЕНОГО ЦВЕТА, ТО И isGreenHere СТАВИМ false
+                isDarkGreenHere = false;
+                FigureMemory.clear();
                 return; // <------- ВЫХОД ИЗ ФУНКЦИИ
 
             }
@@ -397,9 +399,13 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
             // ПОСЛЕ ЭТОГО
             if(cells[i-1][n]->hasFigure()){     // ЕСЛИ ВПЕРЕДИ ЕСТЬ КАКАЯ-ТО ФИГУРА, ТО....
                 isGreenHere = false;
-                isDarkGreenHere = false;
-                FigureMemory.clear();
-                return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
+                if(!isDarkGreenHere){
+                    FigureMemory.clear();
+                    return;
+                } else {
+                    isDarkGreenHere = true;
+                    return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
+                }
             }
             // ЕСЛИ ДОШЛО ДО СЮДА, ТО ЗНАЧИТ ПЕШКА МОЖЕТ ПОЙТИ НАВЕРХ И СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ СВЕРХУ
             if(ID >= 49 && ID <= 56 && !cells[i-2][n]->hasFigure()){    // ЕСЛИ ЭТО ЕЕ ПЕРВОЕ ДВИЖЕНИЕ, ТО ОНА МОЖЕТ ХОДИТЬ НА 2 КЛЕТКИ ВВЕРХ
@@ -414,6 +420,8 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
     else if(whichFigClicked == "black_pawn_peach" || whichFigClicked == "black_pawn_maroon"){
         if(i == 7){
             isGreenHere = false;
+            isDarkGreenHere = false;
+            FigureMemory.clear();
             return;
         }
 
@@ -446,9 +454,13 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
 
         if(cells[i+1][n]->hasFigure()){     // ЕСЛИ ВПЕРЕДИ ЕСТЬ КАКАЯ-ТО ФИГУРА, ТО....
             isGreenHere = false;
-            isDarkGreenHere = false;
-            FigureMemory.clear();
-            return;             // <------ ВЫХОД ИЗ ФУНКЦИИ
+            if(!isDarkGreenHere){
+                FigureMemory.clear();
+                return;
+            } else {
+                isDarkGreenHere = true;
+                return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
+            }
         }
         // ЕСЛИ ДОШЛО ДО СЮДА, ТО ЗНАЧИТ ПЕШКА МОЖЕТ ПОЙТИ НАВЕРХ И СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ СВЕРХУ
         if(ID >= 9 && ID <= 16 && !cells[i+2][n]->hasFigure()){
