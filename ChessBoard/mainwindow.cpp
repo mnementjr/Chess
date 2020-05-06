@@ -446,7 +446,9 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
 
         if(cells[i+1][n]->hasFigure()){     // ЕСЛИ ВПЕРЕДИ ЕСТЬ КАКАЯ-ТО ФИГУРА, ТО....
             isGreenHere = false;
-            return;  // <------ ВЫХОД ИЗ ФУНКЦИИ
+            isDarkGreenHere = false;
+            FigureMemory.clear();
+            return;             // <------ ВЫХОД ИЗ ФУНКЦИИ
         }
         // ЕСЛИ ДОШЛО ДО СЮДА, ТО ЗНАЧИТ ПЕШКА МОЖЕТ ПОЙТИ НАВЕРХ И СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ СВЕРХУ
         if(ID >= 9 && ID <= 16 && !cells[i+2][n]->hasFigure()){
