@@ -336,7 +336,34 @@ void MainWindow::whitePawnTurn(int i, int n){
         swapImages(cells[i+1][n], cells[i][n]);         // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 1 КНОПКУ ВВЕРХ
     }
     if(cells[i][n]->getID() > 0 && cells[i][n]->getID() < 9){
-        QMessageBox::information(this, "Информация", "Пешка дошла до конца, выберите фигуру!"); // <------ ТУТ БУДЕТ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Information);
+        msg.setText("Пешка дошла до конца, выберите фигуру!");
+        QPushButton *queen = msg.addButton(tr("Корлева"), QMessageBox::ActionRole);
+        QPushButton *bishop = msg.addButton(tr("Слон"), QMessageBox::ActionRole);
+        QPushButton *knight = msg.addButton(tr("Конь"), QMessageBox::ActionRole);
+        QPushButton *rook = msg.addButton(tr("Ладья"), QMessageBox::ActionRole);
+        msg.exec();
+        if(msg.clickedButton() == queen){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(white_queen_peach, "white_queen_peach");
+            else cells[i][n]->setImage(white_queen_maroon, "white_queen_maroon");
+        }
+        else if(msg.clickedButton() == bishop){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(white_bishop_peach, "white_bishop_peach");
+            else cells[i][n]->setImage(white_bishop_maroon, "white_bishop_maroon");
+        }
+        else if(msg.clickedButton() == knight){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(white_knight_peach, "white_knight_peach");
+            else cells[i][n]->setImage(white_knight_maroon, "white_knight_maroon");
+        }
+        else if(msg.clickedButton() == rook){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(white_rook_peach, "white_rook_peach");
+            else cells[i][n]->setImage(white_rook_maroon, "white_rook_maroon");
+        }
     }
     FigureMemory.clear();          // В КОНЦЕ ТАКОЙ ФУНКЦИИ ПИШЕМ ЭТО ОБЯЗАТЕЛЬНО
 }
@@ -354,8 +381,35 @@ void MainWindow::blackPawnTurn(int i, int n){
         clearGreenColors();                             // ЕСЛИ ЖЕ НЕТ, ТО...
         swapImages(cells[i-1][n], cells[i][n]);         // ПЕРЕМЕЩАЕМ ИЗОБРАЖЕНИЕ ПЕШКИ НА 1 КНОПКУ ВВЕРХ
     }
-    if(cells[i][n]->getID() > 56 && cells[i][n]->getID() < 65){
-        QMessageBox::information(this, "Информация", "Пешка дошла до конца, выберите фигуру!"); // <------ ТУТ БУДЕТ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+    if(cells[i][n]->getID() > 56 && cells[i][n]->getID() < 65){ // <------ МЕНЮ С ВЫБОРОМ НОВОЙ ФИГУРЫ
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Information);
+        msg.setText("Пешка дошла до конца, выберите фигуру!");
+        QPushButton *queen = msg.addButton(tr("Корлева"), QMessageBox::ActionRole);
+        QPushButton *bishop = msg.addButton(tr("Слон"), QMessageBox::ActionRole);
+        QPushButton *knight = msg.addButton(tr("Конь"), QMessageBox::ActionRole);
+        QPushButton *rook = msg.addButton(tr("Ладья"), QMessageBox::ActionRole);
+        msg.exec();
+        if(msg.clickedButton() == queen){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(black_queen_peach, "black_queen_peach");
+            else cells[i][n]->setImage(black_queen_maroon, "black_queen_maroon");
+        }
+        else if(msg.clickedButton() == bishop){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(black_bishop_peach, "black_bishop_peach");
+            else cells[i][n]->setImage(black_bishop_maroon, "black_bishop_maroon");
+        }
+        else if(msg.clickedButton() == knight){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(black_knight_peach, "black_knight_peach");
+            else cells[i][n]->setImage(black_knight_maroon, "black_knight_maroon");
+        }
+        else if(msg.clickedButton() == rook){
+            if(cells[i][n]->isPeach())
+                cells[i][n]->setImage(black_rook_peach, "black_rook_peach");
+            else cells[i][n]->setImage(black_rook_maroon, "black_rook_maroon");
+        }
     }
     FigureMemory.clear();          // В КОНЦЕ ТАКОЙ ФУНКЦИИ ПИШЕМ ЭТО ОБЯЗАТЕЛЬНО
 }
