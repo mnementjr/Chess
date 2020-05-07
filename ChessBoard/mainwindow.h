@@ -36,6 +36,9 @@ private:
     void anotherQueenTurn(int i, int n);
     void queenSetGreen(int i, int n, int ID, QString whichFigClicked);
 
+    void anotherBishopTurn(int i, int n);
+    void bishopSetGreen(int i, int n, int ID, QString whichFigClicked);
+
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
