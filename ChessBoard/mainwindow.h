@@ -62,9 +62,13 @@ private:
     // ПЕРЕМЕННЫЕ
     bool isGreenHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
     bool isDarkGreenHere; // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ТЕМНО-ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
+    bool isYellowHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЖЁДТОГО ЦВЕТА НА ДОСКЕ (ПРИ РОКИРОВКЕ)
+    bool singleWhiteCastling;    // ОТВЕЧАЕТ ЗА ОДНОКРАТНОСТЬ БЕЛОЙ РОКИРОВКИ
+    bool singleBlackCastling;    // ОТВЕЧАЕТ ЗА ОДНОКРАТНОСТЬ ЧЁРНОЙ РОКИРОВКИ
     QString whichFigureClicked;  // ЗАПОМИНАЕТ ИМЯ ИЗОБРАЖЕНИЯ КНОПКИ, НА КОТОРУЮ НАЖАЛИ
     QVector <Container> DarkGreenMemory;  // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ТЕМНО-ЗЕЛЕНЫМ ЦВЕТОМ
     QVector <Container> GreenMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЗЕЛЕНЫМ ЦВЕТОМ
+    QVector <Container> YellowMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЖЁЛТЫМ ЦВЕТОМ
     QVector <Container> FigureMemory;     // ХРАНИТ ИЗОБРАЖЕНИЕ ФИГУРЫ, НА КОТОРУЮ НАЖАЛИ
     //--------------------------------------------------------------------------------------------------------------------
 
@@ -82,6 +86,7 @@ private:
     QString maroon = QDir::currentPath() + "/images/maroon.jpg";  // КЛЕТКА ЦВЕТОМ MAROON
     QString peach = QDir::currentPath() + "/images/peach.jpg";    // КЛЕТКА ЦВЕТОМ PEACH
     QString green = QDir::currentPath() + "/images/green.jpg";    // КЛЕТКА ЦВЕТОМ GREEN
+    QString yellow = QDir::currentPath() + "/images/yellow.jpg";    // КЛЕТКА ЦВЕТОМ YELLOW
     QString dark_green = QDir::currentPath() + "/images/darkGreen.jpg";    // КЛЕТКА ЦВЕТОМ DARK GREEN
 
     // ПЕШКА
