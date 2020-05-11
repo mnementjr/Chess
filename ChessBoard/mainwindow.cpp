@@ -1196,6 +1196,7 @@ void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
                     YellowMemory.push_back(*new Container(cells[7][6]->getNameImage(), cells[7][6]->getID()));
                     cells[7][6]->setImage(yellow, "yellow");
                     isYellowHere = true;
+                    singleWhiteCastling = true;
                 }
             }
         }
@@ -1318,11 +1319,12 @@ void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
         }
         // РОКИРОВКА ЧЁРНОГО КОРОЛЯ ВПРАВО
         if((i == 0) && (n == 7)){
-            if((cells[i][n]->getNameImage() == "black_rook_maroon") && (cells[0][4]->getNameImage() == "white_king_maroon") && !singleBlackCastling){
+            if((cells[i][n]->getNameImage() == "black_rook_maroon") && (cells[0][4]->getNameImage() == "black_king_peach" && !singleBlackCastling)){
                 if(!cells[0][5]->hasFigure() && !cells[0][6]->hasFigure()){
                     YellowMemory.push_back(*new Container(cells[0][6]->getNameImage(), cells[0][6]->getID()));
                     cells[0][6]->setImage(yellow, "yellow");
                     isYellowHere = true;
+                    singleBlackCastling = true;
                 }
             }
         }
