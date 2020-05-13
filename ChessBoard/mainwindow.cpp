@@ -199,7 +199,7 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                     }
                     else if(whichFigureClicked == "black_king_peach" || whichFigureClicked == "black_king_maroon"){
                         anotherKingTurn(i, n);
-                    } 
+                    }
                     else if(whichFigureClicked == "white_knight_peach" || whichFigureClicked == "white_knight_maroon"){
                         anyKnightTurn(i, n);
                     }
@@ -475,7 +475,7 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
                 cells[i-2][n]->setImage(green, "green");  // ТЕПЕРЬ У ЭТИХ КНОПОК СТАВИМ ЗЕЛЕНЫЙ ЦВЕТ                  // РАЗ МЫ ПОСТАВИЛИ ЗЕЛЕНЫЙ ЦВЕТ, ТО isGreenHere СТАВИМ true
             }
             GreenMemory.push_back(*new Container(cells[i-1][n]->getNameImage(), cells[i-1][n]->getID()));
-            cells[i-1][n]->setImage(green, "green");         
+            cells[i-1][n]->setImage(green, "green");
             isGreenHere = true;
     }
     else if(whichFigClicked == "black_pawn_peach" || whichFigClicked == "black_pawn_maroon"){
@@ -1286,8 +1286,8 @@ void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
             }
         }
         // РОКИРОВКА БЕЛОГО КОРОЛЯ ВПРАВО
-        if((i == 7) && (n == 7)){
-            if((cells[i][n]->getNameImage() == "white_rook_peach") && (cells[7][4]->getNameImage() == "white_king_maroon" && !singleWhiteCastling)){
+        if((i == 7) && (n == 4)){
+            if(cells[7][7]->getNameImage() == "white_rook_peach" && !singleWhiteCastling){
                 if(!cells[7][5]->hasFigure() && !cells[7][6]->hasFigure()){
                     YellowMemory.push_back(*new Container(cells[7][6]->getNameImage(), cells[7][6]->getID()));
                     cells[7][6]->setImage(yellow, "yellow");
