@@ -21,17 +21,17 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>150</y>
-      <width>93</width>
-      <height>28</height>
+      <x>160</x>
+      <y>130</y>
+      <width>331</width>
+      <height>191</height>
      </rect>
     </property>
     <property name="text">
      <string>PushButton</string>
     </property>
     <property name="flat">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

@@ -42,6 +42,10 @@ private:
     void anotherKingTurn(int i, int n);
     void kingSetGreen(int i, int n, int ID, QString whichFigClicked);
 
+    void anyKnightTurn(int i, int n);
+    void knightSetGreen(int i, int n, int ID, QString whichFigClicked);
+
+
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
