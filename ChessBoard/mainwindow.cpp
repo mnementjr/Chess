@@ -1143,29 +1143,34 @@ void MainWindow::anotherKingTurn(int i, int n){
             }
         }
     else if (cells[i][n]->getNameImage() == "yellow"){
-            for (int j = 0; j < YellowMemory.length(); j++) {
-                if(cells[i][n]->getID() == 59){
-                    clearGreenColors();
-                    swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
-                    swapImages(cells[7][0], cells[7][3]);
-                    }
-                    else if(cells[i][n]->getID() == 63){
-                        clearGreenColors();
-                        swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
-                        swapImages(cells[7][7], cells[7][5], 1);
-                    }
-                    else if(cells[i][n]->getID() == 2){
-                        clearGreenColors();
-                        swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
-                        swapImages(cells[0][0], cells[0][3]);
-                    }
-                    else if(cells[i][n]->getID() == 7){
-                        clearGreenColors();
-                        swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
-                        swapImages(cells[0][7], cells[0][5], 1);
-                    }
-                }
+        for (int j = 0; j < YellowMemory.length(); j++) {
+            if(FigureMemory[0].getNameImage().contains("white")){
+                singleWhiteCastling = true;
+            } else if (FigureMemory[0].getNameImage().contains("black")){
+                singleBlackCastling = true;
             }
+            if(cells[i][n]->getID() == 59){
+                clearGreenColors();
+                swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+                swapImages(cells[7][0], cells[7][3]);
+            }
+            else if(cells[i][n]->getID() == 63){
+                clearGreenColors();
+                swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+                swapImages(cells[7][7], cells[7][5], 1);
+            }
+            else if(cells[i][n]->getID() == 2){
+                clearGreenColors();
+                swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+                swapImages(cells[0][0], cells[0][3]);
+            }
+            else if(cells[i][n]->getID() == 7){
+                clearGreenColors();
+                swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
+                swapImages(cells[0][7], cells[0][5], 1);
+            }
+        }
+    }
     FigureMemory.clear();
 }
 void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
@@ -1274,25 +1279,20 @@ void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
                 isGreenHere = true;
             }
         }
-        // РОКИРОВКА БЕЛОГО КОРОЛЯ ВЛЕВО
-        if((i == 7) && (n == 0)){
-            if((cells[i][n]->getNameImage() == "white_rook_maroon") && (cells[7][4]->getNameImage() == "white_king_maroon" && !singleWhiteCastling)){
-                if(!cells[7][1]->hasFigure() && !cells[7][2]->hasFigure() && !cells[7][3]->hasFigure()){
-                    YellowMemory.push_back(*new Container(cells[7][2]->getNameImage(), cells[7][2]->getID()));
-                    cells[7][2]->setImage(yellow, "yellow");
-                    isYellowHere = true;
-                    singleWhiteCastling = true;
-                }
-            }
-        }
-        // РОКИРОВКА БЕЛОГО КОРОЛЯ ВПРАВО
+        // РОКИРОВКА БЕЛОГО КОРОЛЯ ВПРАВО И ВЛЕВО
         if((i == 7) && (n == 4)){
             if(cells[7][7]->getNameImage() == "white_rook_peach" && !singleWhiteCastling){
                 if(!cells[7][5]->hasFigure() && !cells[7][6]->hasFigure()){
                     YellowMemory.push_back(*new Container(cells[7][6]->getNameImage(), cells[7][6]->getID()));
                     cells[7][6]->setImage(yellow, "yellow");
                     isYellowHere = true;
-                    singleWhiteCastling = true;
+                }
+            }
+            if(cells[7][0]->getNameImage() == "white_rook_maroon" && !singleWhiteCastling){
+                if(!cells[7][1]->hasFigure() && !cells[7][2]->hasFigure() && !cells[7][3]->hasFigure()){
+                    YellowMemory.push_back(*new Container(cells[7][2]->getNameImage(), cells[7][2]->getID()));
+                    cells[7][2]->setImage(yellow, "yellow");
+                    isYellowHere = true;
                 }
             }
         }
@@ -1751,7 +1751,7 @@ void MainWindow::swapFigureColor(Cell *cell){
         cell->setImage(white_knight_maroon, "white_knight_maroon");
     }
     else if(cell->getNameImage() == "black_knight_maroon"){
-        cell->setImage(white_knight_peach, "black_knight_peach");
+        cell->setImage(black_knight_peach, "black_knight_peach");
     }
     else if(cell->getNameImage() == "black_knight_peach"){
         cell->setImage(black_knight_maroon, "black_knight_maroon");
