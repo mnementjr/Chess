@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent, QWidget *field)
     information = new QLabel(field);
     information->setFont(QFont("Purisa", 20));
     labelSetWhiteTurn();
-    information->setGeometry(100, 510, 284, 50);
+    information->setGeometry(90, 510, 300, 50);
     information->setStyleSheet("background-color: orange; border: 3px solid black; padding: auto auto auto 30%");
 
 
@@ -1268,7 +1268,7 @@ void MainWindow::anotherKingTurn(int i, int n){
                 swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
                 swapImages(cells[7][7], cells[7][5], 1);
             }
-            else if(cells[i][n]->getID() == 2){
+            else if(cells[i][n]->getID() == 3){
                 clearGreenColors();
                 swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
                 swapImages(cells[0][0], cells[0][3]);
@@ -1521,25 +1521,20 @@ void MainWindow::kingSetGreen(int i, int n, int ID, QString whichFigClicked){
                     isGreenHere = true;
                 }
         }
-        // РОКИРОВКА ЧЁРНОГО КОРОЛЯ ВЛЕВО
-        if((i == 0) && (n == 0)){
-            if((cells[i][n]->getNameImage() == "black_rook_peach") && (cells[0][4]->getNameImage() == "black_king_peach" && !singleBlackCastling)){
-                if(!cells[0][1]->hasFigure() && !cells[0][2]->hasFigure() && !cells[0][3]->hasFigure()){
-                    YellowMemory.push_back(*new Container(cells[0][2]->getNameImage(), cells[0][2]->getID()));
-                    cells[0][2]->setImage(yellow, "yellow");
-                    isYellowHere = true;
-                    singleBlackCastling = true;
-                }
-            }
-        }
-        // РОКИРОВКА ЧЁРНОГО КОРОЛЯ ВПРАВО
-        if((i == 0) && (n == 7)){
-            if((cells[i][n]->getNameImage() == "black_rook_maroon") && (cells[0][4]->getNameImage() == "black_king_peach" && !singleBlackCastling)){
+        // РОКИРОВКА ЧЁРНОГО КОРОЛЯ ВПРАВО И ВЛЕВО
+        if((i == 0) && (n == 4)){
+            if(cells[0][7]->getNameImage() == "black_rook_maroon" && !singleBlackCastling){
                 if(!cells[0][5]->hasFigure() && !cells[0][6]->hasFigure()){
                     YellowMemory.push_back(*new Container(cells[0][6]->getNameImage(), cells[0][6]->getID()));
                     cells[0][6]->setImage(yellow, "yellow");
                     isYellowHere = true;
-                    singleBlackCastling = true;
+                }
+            }
+            if(cells[0][0]->getNameImage() == "black_rook_peach" && !singleBlackCastling){
+                if(!cells[0][1]->hasFigure() && !cells[0][2]->hasFigure() && !cells[0][3]->hasFigure()){
+                    YellowMemory.push_back(*new Container(cells[0][2]->getNameImage(), cells[0][2]->getID()));
+                    cells[0][2]->setImage(yellow, "yellow");
+                    isYellowHere = true;
                 }
             }
         }
@@ -2080,7 +2075,7 @@ void MainWindow::labelSetBlackTurn(){
 }
 
 void MainWindow::labelSetWhiteTurn(){
-    information->setText("Ходят былые!");
+    information->setText("Ходят белые!");
 }
 
 bool MainWindow::checkKingEaten(QString nameImage){
