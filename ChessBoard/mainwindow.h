@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QMap>
 #include <QDir>
+#include <QLabel>
 #include "cell.h"
 #include "container.h"
 
@@ -21,7 +22,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, QWidget *field = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
@@ -58,12 +59,17 @@ private:
     QString findPathImage(QString nameImage);      // ВОЗВРАЩАЕТ ПУТЬ К ИЗОБРАЖЕНИЮ ПО ИМЕНИ ИЗОБРАЖЕНИЯ
     QString findNameImage(QString path);           // ВОЗВРАЩЕТ ИМЯ ИЗОБРАЖЕНИЯ ПО ПУТЮ К ИЗОБРАЖЕНИЮ
     Cell* findCellByID(int ID);                    // ВОЗВРАЩАЕТ ССЫЛКУ НА КАКУЮ-ТО КНОПКУ ПО ID
+    void labelSetWhiteTurn();                      // ПИШЕТ, ЧТО ХОДЯТ БЕЛЫЕ
+    void labelSetBlackTurn();                      // ПИШЕТ, ЧТО ХОДЯТ ЧЕРНЫЙ
+    bool checkKingEaten(QString nameImage);        // ПРОВЕРКА НА ПОБЕДУ
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
 
     //--------------------------------------------------------------------------------------------------------------------
     // ПЕРЕМЕННЫЕ
+    bool whiteTurn;
+    bool blackTurn;
     bool isGreenHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
     bool isDarkGreenHere; // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ТЕМНО-ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
     bool isYellowHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЖЁДТОГО ЦВЕТА НА ДОСКЕ (ПРИ РОКИРОВКЕ)
@@ -74,6 +80,7 @@ private:
     QVector <Container> GreenMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЗЕЛЕНЫМ ЦВЕТОМ
     QVector <Container> YellowMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЖЁЛТЫМ ЦВЕТОМ
     QVector <Container> FigureMemory;     // ХРАНИТ ИЗОБРАЖЕНИЕ ФИГУРЫ, НА КОТОРУЮ НАЖАЛИ
+    QLabel *information;                  // ИНОФРМАЦИЯ О ТОМ, КТО ХОДИТ
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
