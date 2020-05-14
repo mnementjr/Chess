@@ -2082,14 +2082,14 @@ bool MainWindow::checkKingEaten(QString nameImage){
     QMessageBox::information(this, "fsfsd", nameImage);
     if(nameImage.contains("white_king")){
         QMessageBox::information(this, "Победа", "Победили чёрные!!!!!");
-        information->setText("ПОБЕДА БЕЛЫХ");
+        information->setText("ПОБЕДА ЧЁРНЫХ");
         whiteTurn = false;
         blackTurn = false;
         return true;
     }
     else if(nameImage.contains("black_king")){
         QMessageBox::information(this, "Победа", "Победили белые!!!!!");
-        information->setText("ПОБЕДА ЧЁРНЫХ");
+        information->setText("ПОБЕДА БЕЛЫХ!");
         whiteTurn = false;
         blackTurn = false;
         return true;
