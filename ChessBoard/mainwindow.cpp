@@ -28,9 +28,9 @@ MainWindow::MainWindow(QWidget *parent, QWidget *field)
     information = new QLabel(field);
     information->setFont(QFont("Purisa", 20));
     labelSetWhiteTurn();
-    information->setGeometry(90, 510, 300, 50);
-    information->setStyleSheet("background-color: orange; border: 3px solid black; padding: auto auto auto 30%");
-
+    information->setGeometry(100, 510, 320, 55);
+    information->setStyleSheet("background-color: orange; border: 3px solid black");
+    information->setAlignment(Qt::AlignCenter);
 
 
     for(int i = 0; i < 8; ++i) { // ЦИКЛ, В КОТОРОМ СОЗДАЕТСЯ КЛЕТЧАТАЯ ДОСКА (ПУСТАЯ)
@@ -2082,6 +2082,7 @@ bool MainWindow::checkKingEaten(QString nameImage){
     QMessageBox::information(this, "fsfsd", nameImage);
     if(nameImage.contains("white_king")){
         QMessageBox::information(this, "Победа", "Победили чёрные!!!!!");
+        information->setGeometry(70, 510, 380, 55);
         information->setText("ПОБЕДА ЧЁРНЫХ");
         whiteTurn = false;
         blackTurn = false;
@@ -2090,6 +2091,7 @@ bool MainWindow::checkKingEaten(QString nameImage){
     else if(nameImage.contains("black_king")){
         QMessageBox::information(this, "Победа", "Победили белые!!!!!");
         information->setText("ПОБЕДА БЕЛЫХ!");
+        information->setGeometry(70, 510, 380, 55);
         whiteTurn = false;
         blackTurn = false;
         return true;

@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         field.setMinimumSize(QSize(512, 512));
         MainWindow board(&field, &window);       // СОЗДАНИЕ ДОСКИ
         QLabel qlabel(&window);
-        qlabel.setGeometry(600, 100, 300, 200);
+        qlabel.setGeometry(510, 0, 600, 30);
         qlabel.setText(QDir::currentPath() + "\nСюда нужно поместить папки с фото");
 
         window.show();
