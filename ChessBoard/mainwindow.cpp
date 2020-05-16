@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     information = new QLabel(this);
     information->setFont(QFont("Purisa", 20));
     labelSetWhiteTurn();
-    information->setGeometry(100, 510, 320, 55);
+    information->setGeometry(100, 520, 320, 55);
     information->setStyleSheet("background-color: orange; border: 3px solid black");
     information->setAlignment(Qt::AlignCenter);
 
@@ -411,22 +411,22 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                         }
                     //--------------------------ROOK-------------------------------------------------------------------
 
-                    else if(cells[i][n]->getNameImage() == "white_rook_peach"){
+                    else if(cells[i][n]->getNameImage() == "white_rook_peach" && whiteTurn){
                         FigureMemory.push_back(*new Container("white_rook_peach", cells[i][n]->getID()));
                         whichFigureClicked = "white_rook_peach";
                         rookSetGreen(i, n, ID, whichFigureClicked);
                     }
-                    else if(cells[i][n]->getNameImage() == "white_rook_maroon"){
+                    else if(cells[i][n]->getNameImage() == "white_rook_maroon" && whiteTurn){
                         FigureMemory.push_back(*new Container("white_rook_maroon", cells[i][n]->getID()));
                         whichFigureClicked = "white_rook_maroon";
                         rookSetGreen(i, n, ID, whichFigureClicked);
                     }
-                    else if(cells[i][n]->getNameImage() == "black_rook_peach"){
+                    else if(cells[i][n]->getNameImage() == "black_rook_peach" && blackTurn){
                         FigureMemory.push_back(*new Container("black_rook_peach", cells[i][n]->getID()));
                         whichFigureClicked = "black_rook_peach";
                         rookSetGreen(i, n, ID, whichFigureClicked);
                     }
-                    else if(cells[i][n]->getNameImage() == "black_rook_maroon"){
+                    else if(cells[i][n]->getNameImage() == "black_rook_maroon" && blackTurn){
                         FigureMemory.push_back(*new Container("black_rook_maroon", cells[i][n]->getID()));
                         whichFigureClicked = "black_rook_peach";
                         rookSetGreen(i, n, ID, whichFigureClicked);
@@ -2323,6 +2323,7 @@ void MainWindow::rookSetGreen(int i, int n, int ID, QString whichFigClicked)
 
 void MainWindow::anyRookTurn(int i, int n)
 {
+    QString name = FigureMemory[0].getNameImage();
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
@@ -2392,6 +2393,16 @@ void MainWindow::anyRookTurn(int i, int n)
                 }
             }
         }
+    if(name.contains("white")){
+        whiteTurn = false;
+        blackTurn = true;
+        labelSetBlackTurn();
+    }
+    else if(name.contains("black")) {
+        whiteTurn = true;
+        blackTurn = false;
+        labelSetWhiteTurn();
+    }
     FigureMemory.clear();
 }
 //--------------------------------------------------------------------------------------------------------------------
@@ -2661,6 +2672,10 @@ bool MainWindow::checkKingEaten(QString nameImage){
 void MainWindow::resetGame(){
     setButtonBack();
     clearGreenColors();
+    whiteRow = 0;
+    whiteColumn = 0;
+    blackRow = 0;
+    blackColumn = 0;
     isGreenHere = false;
     isDarkGreenHere = false;
     isYellowHere = false;
@@ -2668,7 +2683,7 @@ void MainWindow::resetGame(){
     singleBlackCastling = false;
     blackTurn = false;
     whiteTurn = true;
-    back->setGeometry(640, 510, 140, 55);
+    back->setGeometry(640, 520, 140, 55);
     back->setText("Назад");
     back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
                                            "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
@@ -2705,6 +2720,31 @@ void MainWindow::resetGame(){
         colorConfiguration++;
     }
 
+    for(int i = 0; i < 4; ++i) {
+        for (int n = 0; n < 4; n++) {
+            QString path;
+            QString nameImage;
+            QIcon icon(yellow);
+            QPushButton *button = new QPushButton;
+            button->setIcon(icon);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button->setIconSize(QSize(64, 64));
+            layoutWhite->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
+        }
+    }
+
+    for(int i = 0; i < 4; ++i) {
+        for (int n = 0; n < 4; n++) {
+            QString path;
+            QString nameImage;
+            QIcon icon(yellow);
+            QPushButton *button = new QPushButton;
+            button->setIcon(icon);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button->setIconSize(QSize(64, 64));
+            layoutBlack->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
+        }
+    }
     cells[6][0]->setImage(white_pawn_peach, "white_pawn_peach");
     cells[6][2]->setImage(white_pawn_peach, "white_pawn_peach");
     cells[6][4]->setImage(white_pawn_peach, "white_pawn_peach");
@@ -2741,7 +2781,7 @@ void MainWindow::resetGame(){
 
 
 void MainWindow::setButtonBack(){
-    back->setGeometry(530, 510, 266, 55);
+    back->setGeometry(530, 520, 266, 55);
     back->setText("Назад");
     back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
                                            "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
@@ -2749,7 +2789,7 @@ void MainWindow::setButtonBack(){
 }
 
 void MainWindow::setButtonMainWindow(){
-    back->setGeometry(530, 510, 266, 55);
+    back->setGeometry(530, 520, 266, 55);
     back->setText("Главное меню");
     back->setStyleSheet(QString::fromUtf8("background-color: green; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
                                            "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
