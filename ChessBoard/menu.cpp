@@ -29,13 +29,13 @@ Menu::Menu(QWidget *parent) :
     start->setGeometry(200, 200, 400, 70);
     start->setText("Играть");
     start->setStyleSheet(QString::fromUtf8("background-color: rgb(255,242,0); font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
-                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+                                           "font-size: 40px; border: 4px solid black;"));
 
     exit = new QPushButton(this);
     exit->setText("Выход");
     exit->setGeometry(200, 280, 400, 70);
     exit->setStyleSheet(QString::fromUtf8("background-color: rgb(255,242,0); font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
-                                            "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+                                            "font-size: 40px; border: 4px solid black;"));
 
 
     connect(start, SIGNAL(clicked()), this, SLOT(clickStart()));

@@ -37,20 +37,20 @@ private:
     void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
 
-    void anotherQueenTurn(int i, int n);
-    void queenSetGreen(int i, int n, int ID, QString whichFigClicked);
+    void anyQueenTurn(int i, int n);
+    void queenSetGreen(int i, int n, QString whichFigClicked);
 
-    void anotherBishopTurn(int i, int n);
-    void bishopSetGreen(int i, int n, int ID, QString whichFigClicked);
+    void anyBishopTurn(int i, int n);
+    void bishopSetGreen(int i, int n, QString whichFigClicked);
 
-    void anotherKingTurn(int i, int n);
-    void kingSetGreen(int i, int n, int ID, QString whichFigClicked);
+    void anyKingTurn(int i, int n);
+    void kingSetGreen(int i, int n, QString whichFigClicked);
 
     void anyKnightTurn(int i, int n);
-    void knightSetGreen(int i, int n, int ID, QString whichFigClicked);
+    void knightSetGreen(int i, int n, QString whichFigClicked);
 
     void anyRookTurn(int i, int n);
-    void rookSetGreen(int i, int n, int ID, QString whichFigClicked);
+    void rookSetGreen(int i, int n, QString whichFigClicked);
 
     void setButtonBack();
     void setButtonMainWindow();
