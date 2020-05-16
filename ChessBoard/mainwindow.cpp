@@ -112,22 +112,9 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setIconSize(QSize(64, 64));
             layoutWhite->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
-        }
-    }
-
-    for(int i = 0; i < 4; ++i) {
-        for (int n = 0; n < 4; n++) {
-            QString path;
-            QString nameImage;
-            QIcon icon(yellow);
-            QPushButton *button = new QPushButton;
-            button->setIcon(icon);
-            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-            button->setIconSize(QSize(64, 64));
             layoutBlack->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
         }
     }
-
 
     cells[6][0]->setImage(white_pawn_peach, "white_pawn_peach");
     cells[6][2]->setImage(white_pawn_peach, "white_pawn_peach");
