@@ -448,7 +448,7 @@ void MainWindow::whitePawnTurn(int i, int n){
             button->setIcon(icon);
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setIconSize(QSize(64, 64));
-            layoutBlack->addWidget(button, blackRow, blackColumn);
+            layoutBlack->addWidget(button, blackColumn, blackRow);
             blackRow++;
             if(blackRow % 4 == 0){
             blackRow = 0;
@@ -517,7 +517,7 @@ void MainWindow::blackPawnTurn(int i, int n){
                 button->setIcon(icon);
                 button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                 button->setIconSize(QSize(64, 64));
-                layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                layoutWhite->addWidget(button, whiteColumn, whiteRow);
                 whiteRow++;
                 if(whiteRow % 4 == 0){
                 whiteRow = 0;
@@ -694,7 +694,7 @@ void MainWindow::anyQueenTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    layoutWhite->addWidget(button, whiteColumn, whiteRow);
                     whiteRow++;
                     if(whiteRow % 4 == 0){
                     whiteRow = 0;
@@ -706,7 +706,7 @@ void MainWindow::anyQueenTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    layoutBlack->addWidget(button, blackColumn, blackRow);
                     blackRow++;
                     if(blackRow % 4 == 0){
                     blackRow = 0;
@@ -1112,7 +1112,7 @@ void MainWindow::anyBishopTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    layoutWhite->addWidget(button, whiteColumn, whiteRow);
                     whiteRow++;
                     if(whiteRow % 4 == 0){
                     whiteRow = 0;
@@ -1124,7 +1124,7 @@ void MainWindow::anyBishopTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    layoutBlack->addWidget(button, blackColumn, blackRow);
                     blackRow++;
                     if(blackRow % 4 == 0){
                     blackRow = 0;
@@ -1359,7 +1359,7 @@ void MainWindow::anyKingTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    layoutWhite->addWidget(button, whiteColumn, whiteRow);
                     whiteRow++;
                     if(whiteRow % 4 == 0){
                     whiteRow = 0;
@@ -1371,7 +1371,7 @@ void MainWindow::anyKingTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    layoutBlack->addWidget(button, blackColumn, blackRow);
                     blackRow++;
                     if(blackRow % 4 == 0){
                     blackRow = 0;
@@ -1740,7 +1740,7 @@ void MainWindow::anyKnightTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    layoutWhite->addWidget(button, whiteColumn, whiteRow);
                     whiteRow++;
                     if(whiteRow % 4 == 0){
                     whiteRow = 0;
@@ -1752,7 +1752,7 @@ void MainWindow::anyKnightTurn(int i, int n){
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    layoutBlack->addWidget(button, blackColumn, blackRow);
                     blackRow++;
                     if(blackRow % 4 == 0){
                     blackRow = 0;
@@ -2323,7 +2323,7 @@ void MainWindow::anyRookTurn(int i, int n)
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    layoutWhite->addWidget(button, whiteColumn, whiteRow);
                     whiteRow++;
                     if(whiteRow % 4 == 0){
                     whiteRow = 0;
@@ -2335,7 +2335,7 @@ void MainWindow::anyRookTurn(int i, int n)
                     button->setIcon(icon);
                     button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
                     button->setIconSize(QSize(64, 64));
-                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    layoutBlack->addWidget(button, blackColumn, blackRow);
                     blackRow++;
                     if(blackRow % 4 == 0){
                     blackRow = 0;
@@ -2673,7 +2673,7 @@ void MainWindow::resetGame(){
     singleBlackCastling = false;
     blackTurn = false;
     whiteTurn = true;
-    back->setGeometry(640, 520, 140, 55);
+    back->setGeometry(530, 520, 266, 55);
     back->setText("Назад");
     back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
                                            "font-size: 40px; border: 4px solid black;"));
