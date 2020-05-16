@@ -21,6 +21,8 @@
 1. Играть
 2. Выход
 
+![Image alt](https://github.com/XMelexus/LessonWork3/blob/master/photo.jpg)
+
 ## Основное поле:
 
 Начинают белые. Затем идут ходы по очереди. 
