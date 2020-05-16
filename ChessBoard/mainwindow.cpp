@@ -4,10 +4,11 @@
 #include <QGridLayout>
 #include <QLabel>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    connect(this, &MainWindow::signalShit, menu , &Menu::show);
     ui->setupUi(this);
 
     this->resize(800, 600);
@@ -115,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 //--------------------------------------------------------------------------------------------------------------------
     // ПОДКЛЮЧЕНИЕ СИГНАЛОВ (НЕ ТРОГАТЬ)
-    connect(back, SIGNAL(clicked()), this, SLOT(slotBack()));
+
 
     connect(cells[0][0]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton1()));
     connect(cells[0][1]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton2()));
@@ -192,6 +193,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(this, &MainWindow::signalFromButton, this, &MainWindow::changeImage);
 
+
+    connect(back, SIGNAL(clicked()), this, SLOT(slotBack()));
     connect(this, &MainWindow::signalFromButtonBack, this, &MainWindow::closeWindow);
 
 }
@@ -2325,6 +2328,7 @@ void MainWindow::slotBack(){
 
 void MainWindow::closeWindow(){
 
+    emit signalShit();
     this->close();
 }
 

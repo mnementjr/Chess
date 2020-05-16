@@ -28,7 +28,6 @@ private:
 
     QPushButton *start;
     QPushButton *exit;
-    void CreateGame();
 private slots:
 
     void clickStart();

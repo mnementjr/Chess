@@ -16,9 +16,9 @@ Menu::Menu(QWidget *parent) :
     start = new QPushButton(this);
 
 
-    board = new MainWindow();
+    board = new MainWindow(this);
 
-    //connect(board, &MainWindow::signalFromButtonBack, this, &Menu::show);
+
 
     QPalette pal;
     pal.setColor(QPalette::Background, "#efe4b0");
@@ -53,15 +53,6 @@ void Menu::clickExit(){
     emit signalFromButtonExit();
 }
 
-void Menu::CreateGame(){
-    /*
-    field = new QWidget(window);
-    field->setMaximumSize(QSize(512, 512));
-    field->setMinimumSize(QSize(512, 512));
-    board = new MainWindow(window, field);       // СОЗДАНИЕ ДОСКИ
-    board->show();
-    */
-}
 
 void Menu::startGame(){
     board->show();

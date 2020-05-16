@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *menu, QWidget *parent = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
@@ -149,6 +149,7 @@ private:
 signals:
     void signalFromButton(int ID);
     void signalFromButtonBack();
+    void signalShit();
 
 private slots:
     void changeImage(int ID);
