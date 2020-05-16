@@ -10,6 +10,7 @@
 #include <QLabel>
 #include "cell.h"
 #include "container.h"
+#include "menu.h"
 
 // ТУТ НИЧЕГО НЕ ТРОГАЛ
 
@@ -22,7 +23,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, QWidget *field = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
@@ -68,6 +69,7 @@ private:
 
     //--------------------------------------------------------------------------------------------------------------------
     // ПЕРЕМЕННЫЕ
+    QWidget *field;
     bool whiteTurn;
     bool blackTurn;
     bool isGreenHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
@@ -81,6 +83,7 @@ private:
     QVector <Container> YellowMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЖЁЛТЫМ ЦВЕТОМ
     QVector <Container> FigureMemory;     // ХРАНИТ ИЗОБРАЖЕНИЕ ФИГУРЫ, НА КОТОРУЮ НАЖАЛИ
     QLabel *information;                  // ИНОФРМАЦИЯ О ТОМ, КТО ХОДИТ
+    QPushButton *back;
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
@@ -145,11 +148,15 @@ private:
 
 signals:
     void signalFromButton(int ID);
+    void signalFromButtonBack();
 
 private slots:
     void changeImage(int ID);
-    void slotButton1();
 
+    void closeWindow();
+    void slotBack();
+
+    void slotButton1();
     void slotButton2();
     void slotButton3();
     void slotButton4();

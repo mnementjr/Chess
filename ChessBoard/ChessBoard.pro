@@ -19,15 +19,18 @@ SOURCES += \
     cell.cpp \
     container.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    menu.cpp
 
 HEADERS += \
     cell.h \
     container.h \
-    mainwindow.h
+    mainwindow.h \
+    menu.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

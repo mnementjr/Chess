@@ -4,11 +4,21 @@
 #include <QGridLayout>
 #include <QLabel>
 
-MainWindow::MainWindow(QWidget *parent, QWidget *field)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    this->resize(800, 600);
+    this->setWindowTitle("Chess");  // НАЗВАНИЕ ПРОГРАММЫ
+    this->setMinimumSize(QSize(800, 600));
+    this->setMaximumSize(QSize(800, 600));
+
+    field = new QWidget(this);
+    field->setMaximumSize(QSize(512, 512));
+    field->setMinimumSize(QSize(512, 512));
+
     isGreenHere = false;
     isDarkGreenHere = false;
     isYellowHere = false;
@@ -17,15 +27,21 @@ MainWindow::MainWindow(QWidget *parent, QWidget *field)
     blackTurn = false;
     whiteTurn = true;
 
+    back = new QPushButton(this);
+    back->setGeometry(640, 510, 140, 55);
+    back->setText("Назад");
+    back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
+                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+
     // РЕАЛИЗАЦИЯ КОНСТРУКТАРА
     int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ АЙДИ ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
     int colorConfiguration = 1;    // ПАРАМЕТР. НУЖЕН ДЛЯ ТОГО, ЧТОБЫ ЧЕРЕДОВАЛИСЬ ЦВЕТА
 
-    QGridLayout *layout = new QGridLayout(parent); // СОЗДАНИЕ ОБЛАСТИ, В КОТОРОЙ БУДУТ КНОПКИ
+    QGridLayout *layout = new QGridLayout(field); // СОЗДАНИЕ ОБЛАСТИ, В КОТОРОЙ БУДУТ КНОПКИ
     layout->setHorizontalSpacing(0);    // УСТАНОВКА ОТСТУПОВ МЕЖДУ КНОПКАМИ
     layout->setVerticalSpacing(0);
 
-    information = new QLabel(field);
+    information = new QLabel(this);
     information->setFont(QFont("Purisa", 20));
     labelSetWhiteTurn();
     information->setGeometry(100, 510, 320, 55);
@@ -99,6 +115,8 @@ MainWindow::MainWindow(QWidget *parent, QWidget *field)
 
 //--------------------------------------------------------------------------------------------------------------------
     // ПОДКЛЮЧЕНИЕ СИГНАЛОВ (НЕ ТРОГАТЬ)
+    connect(back, SIGNAL(clicked()), this, SLOT(slotBack()));
+
     connect(cells[0][0]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton1()));
     connect(cells[0][1]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton2()));
     connect(cells[0][2]->getButton(), SIGNAL(clicked()), this, SLOT(slotButton3()));
@@ -173,6 +191,8 @@ MainWindow::MainWindow(QWidget *parent, QWidget *field)
 
 
     connect(this, &MainWindow::signalFromButton, this, &MainWindow::changeImage);
+
+    connect(this, &MainWindow::signalFromButtonBack, this, &MainWindow::closeWindow);
 
 }
 
@@ -2297,6 +2317,15 @@ void MainWindow::slotButton63(){
 }
 void MainWindow::slotButton64(){
     emit signalFromButton(64);
+}
+
+void MainWindow::slotBack(){
+    emit signalFromButtonBack();
+}
+
+void MainWindow::closeWindow(){
+
+    this->close();
 }
 
 MainWindow::~MainWindow()
