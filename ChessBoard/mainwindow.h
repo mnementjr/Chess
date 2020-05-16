@@ -7,8 +7,10 @@
 #include <QPushButton>
 #include <QMap>
 #include <QDir>
+#include <QLabel>
 #include "cell.h"
 #include "container.h"
+#include "menu.h"
 
 // ТУТ НИЧЕГО НЕ ТРОГАЛ
 
@@ -21,7 +23,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *menu, QWidget *parent = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
@@ -36,8 +38,15 @@ private:
     void anotherQueenTurn(int i, int n);
     void queenSetGreen(int i, int n, int ID, QString whichFigClicked);
 
+    void anotherBishopTurn(int i, int n);
+    void bishopSetGreen(int i, int n, int ID, QString whichFigClicked);
+
+    void anotherKingTurn(int i, int n);
+    void kingSetGreen(int i, int n, int ID, QString whichFigClicked);
+
     void anyKnightTurn(int i, int n);
     void knightSetGreen(int i, int n, int ID, QString whichFigClicked);
+
 
     void anyRookTurn(int i, int n);
     void rookSetGreen(int i, int n, int ID, QString whichFigClicked);
@@ -55,18 +64,30 @@ private:
     QString findPathImage(QString nameImage);      // ВОЗВРАЩАЕТ ПУТЬ К ИЗОБРАЖЕНИЮ ПО ИМЕНИ ИЗОБРАЖЕНИЯ
     QString findNameImage(QString path);           // ВОЗВРАЩЕТ ИМЯ ИЗОБРАЖЕНИЯ ПО ПУТЮ К ИЗОБРАЖЕНИЮ
     Cell* findCellByID(int ID);                    // ВОЗВРАЩАЕТ ССЫЛКУ НА КАКУЮ-ТО КНОПКУ ПО ID
+    void labelSetWhiteTurn();                      // ПИШЕТ, ЧТО ХОДЯТ БЕЛЫЕ
+    void labelSetBlackTurn();                      // ПИШЕТ, ЧТО ХОДЯТ ЧЕРНЫЙ
+    bool checkKingEaten(QString nameImage);        // ПРОВЕРКА НА ПОБЕДУ
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
 
     //--------------------------------------------------------------------------------------------------------------------
     // ПЕРЕМЕННЫЕ
+    QWidget *field;
+    bool whiteTurn;
+    bool blackTurn;
     bool isGreenHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
     bool isDarkGreenHere; // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ТЕМНО-ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
+    bool isYellowHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЖЁДТОГО ЦВЕТА НА ДОСКЕ (ПРИ РОКИРОВКЕ)
+    bool singleWhiteCastling;    // ОТВЕЧАЕТ ЗА ОДНОКРАТНОСТЬ БЕЛОЙ РОКИРОВКИ
+    bool singleBlackCastling;    // ОТВЕЧАЕТ ЗА ОДНОКРАТНОСТЬ ЧЁРНОЙ РОКИРОВКИ
     QString whichFigureClicked;  // ЗАПОМИНАЕТ ИМЯ ИЗОБРАЖЕНИЯ КНОПКИ, НА КОТОРУЮ НАЖАЛИ
     QVector <Container> DarkGreenMemory;  // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ТЕМНО-ЗЕЛЕНЫМ ЦВЕТОМ
     QVector <Container> GreenMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЗЕЛЕНЫМ ЦВЕТОМ
+    QVector <Container> YellowMemory;      // ХРАНИТ ИЗОБРАЖЕНИЯ КНОПОК, КОТОРЫЕ БЫЛИ ЗАМЕНЕНЫ ЖЁЛТЫМ ЦВЕТОМ
     QVector <Container> FigureMemory;     // ХРАНИТ ИЗОБРАЖЕНИЕ ФИГУРЫ, НА КОТОРУЮ НАЖАЛИ
+    QLabel *information;                  // ИНОФРМАЦИЯ О ТОМ, КТО ХОДИТ
+    QPushButton *back;
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
@@ -83,6 +104,7 @@ private:
     QString maroon = QDir::currentPath() + "/images/maroon.jpg";  // КЛЕТКА ЦВЕТОМ MAROON
     QString peach = QDir::currentPath() + "/images/peach.jpg";    // КЛЕТКА ЦВЕТОМ PEACH
     QString green = QDir::currentPath() + "/images/green.jpg";    // КЛЕТКА ЦВЕТОМ GREEN
+    QString yellow = QDir::currentPath() + "/images/yellow.jpg";    // КЛЕТКА ЦВЕТОМ YELLOW
     QString dark_green = QDir::currentPath() + "/images/darkGreen.jpg";    // КЛЕТКА ЦВЕТОМ DARK GREEN
 
     // ПЕШКА
@@ -130,11 +152,16 @@ private:
 
 signals:
     void signalFromButton(int ID);
+    void signalFromButtonBack();
+    void signalShit();
 
 private slots:
     void changeImage(int ID);
-    void slotButton1();
 
+    void closeWindow();
+    void slotBack();
+
+    void slotButton1();
     void slotButton2();
     void slotButton3();
     void slotButton4();

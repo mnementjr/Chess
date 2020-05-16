@@ -6,19 +6,23 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-        QWidget window;
-        window.resize(800, 600);
-        window.setWindowTitle("Chess");  // НАЗВАНИЕ ПРОГРАММЫ
-        window.setMinimumSize(QSize(512, 512));
+        Menu menu;
+        QPalette pal;
+        pal.setColor(QPalette::Background, "#efe4b0");
+        menu.setPalette(pal);
+        menu.show();
+
+        /*
         QWidget field(&window);
         field.setMaximumSize(QSize(512, 512));
         field.setMinimumSize(QSize(512, 512));
-        MainWindow board(&field);       // СОЗДАНИЕ ДОСКИ
-        QLabel qlabel(&window);
-        qlabel.setGeometry(600, 100, 300, 200);
-        qlabel.setText(QDir::currentPath() + "\nСюда нужно поместить папки с фото");
+        MainWindow board(&field, &window);       // СОЗДАНИЕ ДОСКИ
 
-        window.show();
+        QLabel qlabel(&window);
+        qlabel.setGeometry(510, 0, 600, 30);
+        qlabel.setText(QDir::currentPath() + "\nСюда нужно поместить папки с фото");
+        */
+
 
     return a.exec();
 }
