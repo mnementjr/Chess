@@ -104,15 +104,18 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
 
     for(int i = 0; i < 4; ++i) {
         for (int n = 0; n < 4; n++) {
-            QString path;
-            QString nameImage;
             QIcon icon(yellow);
             QPushButton *button = new QPushButton;
             button->setIcon(icon);
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setIconSize(QSize(64, 64));
             layoutWhite->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
-            layoutBlack->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
+            QIcon icon2(yellow);
+            QPushButton *button2 = new QPushButton;
+            button2->setIcon(icon2);
+            button2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button2->setIconSize(QSize(64, 64));
+            layoutBlack->addWidget(button2, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
         }
     }
 
