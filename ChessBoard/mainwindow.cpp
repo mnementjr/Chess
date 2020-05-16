@@ -294,21 +294,25 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
 
                         //----------------------------ПЕШКА--------------------------------------------------------
                         if(cells[i][n]->getNameImage() == "white_pawn_peach" && whiteTurn){  // ЕСЛИ БЕЛАЯ ПЕРСИКОВАЯ ПЕШКА
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_pawn_peach", cells[i][n]->getID()));  // ТО СОХРАНЯЕМ ЕЕ В ВЕКТОР
                             whichFigureClicked = "white_pawn_peach";
                             pawnSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "white_pawn_maroon" && whiteTurn){ // ЕСЛИ БЕЛАЯ КРАСНАЯ ПЕШКА
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_pawn_maroon", cells[i][n]->getID()));  // ТО СОХРАНЯЕМ ЕЕ В ВЕКТОР
                             whichFigureClicked = "white_pawn_maroon";
                             pawnSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_pawn_peach" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_pawn_peach", cells[i][n]->getID()));
                             whichFigureClicked = "black_pawn_peach";
                             pawnSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_pawn_maroon" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_pawn_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "black_pawn_maroon";
                             pawnSetGreen(i, n, ID, whichFigureClicked);
@@ -316,63 +320,75 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
 
                         //------------------------------КОРОЛЕВА---------------------------------------------------------
                         else if(cells[i][n]->getNameImage() == "white_queen_peach" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_queen_peach", cells[i][n]->getID()));
                             whichFigureClicked = "white_queen_peach";
                             queenSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "white_queen_maroon" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_queen_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "white_queen_maroon";
                             queenSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_queen_peach" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_queen_peach", cells[i][n]->getID()));
                             whichFigureClicked = "black_queen_peach";
                             queenSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_queen_maroon" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_queen_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "black_queen_maroon";
                             queenSetGreen(i, n, ID, whichFigureClicked);
                         }
                         //------------------------------СЛОН---------------------------------------------------------
                         else if(cells[i][n]->getNameImage() == "white_bishop_peach" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_bishop_peach", cells[i][n]->getID()));
                             whichFigureClicked = "white_bishop_peach";
                             bishopSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "white_bishop_maroon" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_bishop_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "white_bishop_maroon";
                             bishopSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_bishop_peach" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_bishop_peach", cells[i][n]->getID()));
                             whichFigureClicked = "black_bishop_peach";
                             bishopSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_bishop_maroon" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_bishop_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "black_bishop_maroon";
                             bishopSetGreen(i, n, ID, whichFigureClicked);
                         }
                         //------------------------------КОРОЛЬ---------------------------------------------------------
                         else if(cells[i][n]->getNameImage() == "white_king_peach" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_king_peach", cells[i][n]->getID()));
                             whichFigureClicked = "white_king_peach";
                             kingSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "white_king_maroon" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_king_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "white_king_maroon";
                             kingSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_king_peach" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_king_peach", cells[i][n]->getID()));
                             whichFigureClicked = "black_king_peach";
                             kingSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_king_maroon" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_king_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "black_king_maroon";
                             kingSetGreen(i, n, ID, whichFigureClicked);
@@ -380,21 +396,25 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                         //----------------------------КОНЬ-----------------------------------------------------------------
 
                         else if(cells[i][n]->getNameImage() == "white_knight_peach" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_knight_peach", cells[i][n]->getID()));
                             whichFigureClicked = "white_knight_peach";
                             knightSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "white_knight_maroon" && whiteTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("white_knight_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "white_knight_maroon";
                             knightSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_knight_peach" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_knight_peach", cells[i][n]->getID()));
                             whichFigureClicked = "black_knight_peach";
                             knightSetGreen(i, n, ID, whichFigureClicked);
                         }
                         else if(cells[i][n]->getNameImage() == "black_knight_maroon" && blackTurn){
+                            FigureMemory.clear();
                             FigureMemory.push_back(*new Container("black_knight_maroon", cells[i][n]->getID()));
                             whichFigureClicked = "black_knight_maroon";
                             knightSetGreen(i, n, ID, whichFigureClicked);
