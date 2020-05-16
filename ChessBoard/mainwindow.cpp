@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
                                            "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
 
     // РЕАЛИЗАЦИЯ КОНСТРУКТОРА
-    int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ АЙДИ ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
+    int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ ID ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
     int colorConfiguration = 1;    // ПАРАМЕТР. НУЖЕН ДЛЯ ТОГО, ЧТОБЫ ЧЕРЕДОВАЛИСЬ ЦВЕТА
 
     QGridLayout *layout = new QGridLayout(field); // СОЗДАНИЕ ОБЛАСТИ, В КОТОРОЙ БУДУТ КНОПКИ
@@ -85,7 +85,7 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
                     nameImage = "maroon";
                 }
             }
-            cells[i][n] = new Cell(new QWidget, ID);   // ЗАПОЛНЕНИЕ МАССИВА ИЗ КЛАССА BOARD ЭКЗЕМПЛЯРАМИ КЛАССА CELL
+            cells[i][n] = new Cell(new QWidget, ID);   // ЗАПОЛНЕНИЕ МАССИВА КЛАССА CELL
             cells[i][n]->setImage(path, nameImage);
             layout->addWidget(cells[i][n]->getButton(), i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
             ID++;
