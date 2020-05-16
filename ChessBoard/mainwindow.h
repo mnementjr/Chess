@@ -31,6 +31,7 @@ private:
 
     //--------------------------------------------------------------------------------------------------------------------
     // МЕТОДЫ, КОТОРЫЕ СВЯЗАНЫ С ХОДАМИ ФИГУР (СЮДА ИХ ДОБАВЛЯТЬ ПРИ РЕАЛИЗАЦИИ НОВЫХ ФИГУР)
+    void resetGame();
     void whitePawnTurn(int i, int n);
     void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
@@ -63,6 +64,8 @@ private:
     void labelSetWhiteTurn();                      // ПИШЕТ, ЧТО ХОДЯТ БЕЛЫЕ
     void labelSetBlackTurn();                      // ПИШЕТ, ЧТО ХОДЯТ ЧЕРНЫЙ
     bool checkKingEaten(QString nameImage);        // ПРОВЕРКА НА ПОБЕДУ
+    void setButtonBack();
+    void setButtonMainWindow();
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
