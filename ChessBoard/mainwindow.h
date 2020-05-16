@@ -32,6 +32,7 @@ private:
 
     //--------------------------------------------------------------------------------------------------------------------
     // МЕТОДЫ, КОТОРЫЕ СВЯЗАНЫ С ХОДАМИ ФИГУР (СЮДА ИХ ДОБАВЛЯТЬ ПРИ РЕАЛИЗАЦИИ НОВЫХ ФИГУР)
+    void resetGame();
     void whitePawnTurn(int i, int n);
     void blackPawnTurn(int i, int n);
     void pawnSetGreen(int i, int n, int ID, QString whichFigClicked);
@@ -48,10 +49,11 @@ private:
     void anyKnightTurn(int i, int n);
     void knightSetGreen(int i, int n, int ID, QString whichFigClicked);
 
-
     void anyRookTurn(int i, int n);
     void rookSetGreen(int i, int n, int ID, QString whichFigClicked);
 
+    void setButtonBack();
+    void setButtonMainWindow();
 
     //--------------------------------------------------------------------------------------------------------------------
 

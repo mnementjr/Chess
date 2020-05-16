@@ -37,10 +37,7 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     whiteColumn = 0;
 
     back = new QPushButton(this);
-    back->setGeometry(640, 510, 140, 55);
-    back->setText("Назад");
-    back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
-                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+    setButtonBack();
 
     // РЕАЛИЗАЦИЯ КОНСТРУКТОРА
     int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ ID ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
@@ -2479,13 +2476,13 @@ void MainWindow::labelSetWhiteTurn(){
 }
 
 bool MainWindow::checkKingEaten(QString nameImage){
-    QMessageBox::information(this, "fsfsd", nameImage);
     if(nameImage.contains("white_king")){
         QMessageBox::information(this, "Победа", "Победили чёрные!!!!!");
         information->setGeometry(70, 510, 380, 55);
         information->setText("ПОБЕДА ЧЁРНЫХ");
         whiteTurn = false;
         blackTurn = false;
+        setButtonMainWindow();
         return true;
     }
     else if(nameImage.contains("black_king")){
@@ -2494,9 +2491,107 @@ bool MainWindow::checkKingEaten(QString nameImage){
         information->setGeometry(70, 510, 380, 55);
         whiteTurn = false;
         blackTurn = false;
+        setButtonMainWindow();
         return true;
     }
     return false;
+}
+
+void MainWindow::resetGame(){
+    setButtonBack();
+    clearGreenColors();
+    isGreenHere = false;
+    isDarkGreenHere = false;
+    isYellowHere = false;
+    singleWhiteCastling = false;
+    singleBlackCastling = false;
+    blackTurn = false;
+    whiteTurn = true;
+    back->setGeometry(640, 510, 140, 55);
+    back->setText("Назад");
+    back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
+                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+    labelSetWhiteTurn();
+    int ID = 1;      // ЛОКАЛЬНАЯ ПЕРЕМЕННАЯ АЙДИ ДЛЯ ТОГО, ЧТОБЫ У КАЖДОГО ЭКЗЕМПЛЯРА CELL БЫЛ СВОЙ ID (ПОКА НЕ ЗНАЮ КАК ДАЛЬШЕ ЭТО ИСПОЛЬЗОВАТЬ)
+    int colorConfiguration = 1;    // ПАРАМЕТР. НУЖЕН ДЛЯ ТОГО, ЧТОБЫ ЧЕРЕДОВАЛИСЬ ЦВЕТА
+    for(int i = 0; i < 8; ++i) { // ЦИКЛ, В КОТОРОМ СОЗДАЕТСЯ КЛЕТЧАТАЯ ДОСКА (ПУСТАЯ)
+        for (int n = 0; n < 8; n++) {
+            QString path;            // СЮДА УСТАНОВИТСЯ ПУТЬ ДО ИЗОБРАЖЕНИЯ
+            QString nameImage;       // СЮДА УСТАНОВИТСЯ НАЗВАНИЕ ФИГУРЫ, ЧТОБ ПОТОМ ЕЕ МОЖНО БЫЛО ИНДЕНТИФИЦИРОВАТЬ
+            if(colorConfiguration % 2 == 1){
+                if(ID % 2 == 0){
+                    path = maroon;
+                    nameImage = "maroon";
+                }
+                else{
+                    path = peach;
+                    nameImage = "peach";
+                }
+            } else {
+                if(ID % 2 == 0){
+                    path = peach;
+                    nameImage = "peach";
+                }
+                else{
+                    path = maroon;
+                    nameImage = "maroon";
+                }
+            }
+
+            cells[i][n]->setImage(path, nameImage);
+            ID++;
+        }
+        colorConfiguration++;
+    }
+
+    cells[6][0]->setImage(white_pawn_peach, "white_pawn_peach");
+    cells[6][2]->setImage(white_pawn_peach, "white_pawn_peach");
+    cells[6][4]->setImage(white_pawn_peach, "white_pawn_peach");
+    cells[6][6]->setImage(white_pawn_peach, "white_pawn_peach");
+    cells[6][1]->setImage(white_pawn_maroon, "white_pawn_maroon");
+    cells[6][3]->setImage(white_pawn_maroon, "white_pawn_maroon");
+    cells[6][5]->setImage(white_pawn_maroon, "white_pawn_maroon");
+    cells[6][7]->setImage(white_pawn_maroon, "white_pawn_maroon");
+    cells[1][1]->setImage(black_pawn_peach, "black_pawn_peach");
+    cells[1][3]->setImage(black_pawn_peach, "black_pawn_peach");
+    cells[1][5]->setImage(black_pawn_peach, "black_pawn_peach");
+    cells[1][7]->setImage(black_pawn_peach, "black_pawn_peach");
+    cells[1][0]->setImage(black_pawn_maroon, "black_pawn_maroon");
+    cells[1][2]->setImage(black_pawn_maroon, "black_pawn_maroon");
+    cells[1][4]->setImage(black_pawn_maroon, "black_pawn_maroon");
+    cells[1][6]->setImage(black_pawn_maroon, "black_pawn_maroon");
+    cells[7][7]->setImage(white_rook_peach, "white_rook_peach");
+    cells[7][0]->setImage(white_rook_maroon, "white_rook_maroon");
+    cells[0][0]->setImage(black_rook_peach, "black_rook_peach");
+    cells[0][7]->setImage(black_rook_maroon, "black_rook_maroon");
+    cells[7][1]->setImage(white_knight_peach, "white_knight_peach");
+    cells[7][6]->setImage(white_knight_maroon, "white_knight_maroon");
+    cells[0][6]->setImage(black_knight_peach, "black_knight_peach");
+    cells[0][1]->setImage(black_knight_maroon, "black_knight_maroon");
+    cells[7][5]->setImage(white_bishop_peach, "white_bishop_peach");
+    cells[7][2]->setImage(white_bishop_maroon, "white_bishop_maroon");
+    cells[0][2]->setImage(black_bishop_peach, "black_bishop_peach");
+    cells[0][5]->setImage(black_bishop_maroon, "black_bishop_maroon");
+    cells[7][3]->setImage(white_queen_peach, "white_queen_peach");
+    cells[0][3]->setImage(black_queen_maroon, "black_queen_maroon");
+    cells[7][4]->setImage(white_king_maroon, "white_king_maroon");
+    cells[0][4]->setImage(black_king_peach, "black_king_peach");
+}
+
+
+void MainWindow::setButtonBack(){
+    back->setGeometry(530, 510, 266, 55);
+    back->setText("Назад");
+    back->setStyleSheet(QString::fromUtf8("background-color: red; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
+                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
+
+}
+
+void MainWindow::setButtonMainWindow(){
+    back->setGeometry(530, 510, 266, 55);
+    back->setText("Главное меню");
+    back->setStyleSheet(QString::fromUtf8("background-color: green; font-family: Times New Roman, Georgia, Serif; font-weight: bold;"
+                                           "font-stretch: expanded; font-size: 40px; border: 4px solid black;"));
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -2700,11 +2795,12 @@ void MainWindow::slotButton64(){
 }
 
 void MainWindow::slotBack(){
+    resetGame();
     emit signalFromButtonBack();
 }
 
 void MainWindow::closeWindow(){
-
+    resetGame();
     emit signalShit();
     this->close();
 }
