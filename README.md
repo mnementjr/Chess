@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/itstep-vrn/chess/badge)](https://www.codefactor.io/repository/github/itstep-vrn/chess)
+
 # CHESS \(ШАХМАТЫ\)
 
 Шахматы - игра для двоих игроков.
