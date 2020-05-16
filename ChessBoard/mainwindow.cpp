@@ -26,6 +26,12 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     fieldWhite->setGeometry(515, 0, 256, 256);
     fieldWhite->setStyleSheet("background-color: beige");
 
+    fieldBlack = new QWidget(this);
+    fieldBlack->setMaximumSize(QSize(256, 256));
+    fieldBlack->setMinimumSize(QSize(256, 256));
+    fieldBlack->setGeometry(515, 260, 256, 256);
+    fieldBlack->setStyleSheet("background-color: beige");
+
     isGreenHere = false;
     isDarkGreenHere = false;
     isYellowHere = false;
@@ -35,6 +41,8 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     whiteTurn = true;
     whiteRow = 0;
     whiteColumn = 0;
+    blackRow = 0;
+    blackColumn = 0;
 
     back = new QPushButton(this);
     setButtonBack();
@@ -50,6 +58,10 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
     layoutWhite = new QGridLayout(fieldWhite);
     layoutWhite->setHorizontalSpacing(0);
     layoutWhite->setVerticalSpacing(0);
+
+    layoutBlack = new QGridLayout(fieldBlack);
+    layoutBlack->setHorizontalSpacing(0);
+    layoutBlack->setVerticalSpacing(0);
 
     information = new QLabel(this);
     information->setFont(QFont("Purisa", 20));
@@ -100,6 +112,19 @@ MainWindow::MainWindow(QWidget *menu, QWidget *parent)
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setIconSize(QSize(64, 64));
             layoutWhite->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
+        }
+    }
+
+    for(int i = 0; i < 4; ++i) {
+        for (int n = 0; n < 4; n++) {
+            QString path;
+            QString nameImage;
+            QIcon icon(yellow);
+            QPushButton *button = new QPushButton;
+            button->setIcon(icon);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button->setIconSize(QSize(64, 64));
+            layoutBlack->addWidget(button, i, n); // ВЫВОД КНОПКИ НА ОБЛАСТЬ
         }
     }
 
@@ -428,6 +453,17 @@ void MainWindow::whitePawnTurn(int i, int n){
                     return;
                 }
             }
+            QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+            QPushButton *button = new QPushButton;
+            button->setIcon(icon);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button->setIconSize(QSize(64, 64));
+            layoutBlack->addWidget(button, blackRow, blackColumn);
+            blackRow++;
+            if(blackRow % 4 == 0){
+            blackRow = 0;
+            blackColumn++;
+        }
         }
         clearGreenColors();
         swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n], 1);
@@ -662,6 +698,31 @@ void MainWindow::anotherQueenTurn(int i, int n){
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
+                if(DarkGreenMemory[j].getNameImage().contains("white")){
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    whiteRow++;
+                    if(whiteRow % 4 == 0){
+                    whiteRow = 0;
+                    whiteColumn++;
+            }
+                } else {
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    blackRow++;
+                    if(blackRow % 4 == 0){
+                    blackRow = 0;
+                    blackColumn++;
+                    }
+                }
                 if(DarkGreenMemory[j].getNameImage().contains("peach") && findCellByID(FigureMemory[0].getID())->isMaroon()){
                     if(checkKingEaten(DarkGreenMemory[j].getNameImage())){
                         clearGreenColors();
@@ -1055,6 +1116,31 @@ void MainWindow::anotherBishopTurn(int i, int n){
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
+                if(DarkGreenMemory[j].getNameImage().contains("white")){
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    whiteRow++;
+                    if(whiteRow % 4 == 0){
+                    whiteRow = 0;
+                    whiteColumn++;
+            }
+                } else {
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    blackRow++;
+                    if(blackRow % 4 == 0){
+                    blackRow = 0;
+                    blackColumn++;
+                    }
+                }
                 if(DarkGreenMemory[j].getNameImage().contains("peach") && findCellByID(FigureMemory[0].getID())->isPeach()){
                     if(checkKingEaten(DarkGreenMemory[j].getNameImage())){
                         clearGreenColors();
@@ -1277,6 +1363,31 @@ void MainWindow::anotherKingTurn(int i, int n){
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
+                if(DarkGreenMemory[j].getNameImage().contains("white")){
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    whiteRow++;
+                    if(whiteRow % 4 == 0){
+                    whiteRow = 0;
+                    whiteColumn++;
+            }
+                } else {
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    blackRow++;
+                    if(blackRow % 4 == 0){
+                    blackRow = 0;
+                    blackColumn++;
+                    }
+                }
                 if(DarkGreenMemory[j].getNameImage().contains("peach") && findCellByID(FigureMemory[0].getID())->isMaroon()){
                     if(checkKingEaten(DarkGreenMemory[j].getNameImage())){
                         clearGreenColors();
@@ -1633,6 +1744,31 @@ void MainWindow::anyKnightTurn(int i, int n){
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
+                if(DarkGreenMemory[j].getNameImage().contains("white")){
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    whiteRow++;
+                    if(whiteRow % 4 == 0){
+                    whiteRow = 0;
+                    whiteColumn++;
+            }
+                } else {
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    blackRow++;
+                    if(blackRow % 4 == 0){
+                    blackRow = 0;
+                    blackColumn++;
+                    }
+                }
                 if(DarkGreenMemory[j].getNameImage().contains("peach") && findCellByID(FigureMemory[0].getID())->isMaroon()){
                     if(checkKingEaten(DarkGreenMemory[j].getNameImage())){
                         clearGreenColors();
@@ -2190,6 +2326,31 @@ void MainWindow::anyRookTurn(int i, int n)
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
             if(cells[i][n]->getID() == DarkGreenMemory[j].getID()){
+                if(DarkGreenMemory[j].getNameImage().contains("white")){
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutWhite->addWidget(button, whiteRow, whiteColumn);
+                    whiteRow++;
+                    if(whiteRow % 4 == 0){
+                    whiteRow = 0;
+                    whiteColumn++;
+            }
+                } else {
+                    QIcon icon(findPathImage(DarkGreenMemory[j].getNameImage()));
+                    QPushButton *button = new QPushButton;
+                    button->setIcon(icon);
+                    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                    button->setIconSize(QSize(64, 64));
+                    layoutBlack->addWidget(button, blackRow, blackColumn);
+                    blackRow++;
+                    if(blackRow % 4 == 0){
+                    blackRow = 0;
+                    blackColumn++;
+                    }
+                }
                 if(DarkGreenMemory[j].getNameImage().contains("peach") && findCellByID(FigureMemory[0].getID())->isMaroon()){
                     clearGreenColors();
                     swapImages(findCellByID(FigureMemory[0].getID()), cells[i][n]);

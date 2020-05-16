@@ -78,7 +78,9 @@ private:
     // ПЕРЕМЕННЫЕ
     QWidget *field;
     QWidget *fieldWhite;
+    QWidget *fieldBlack;
     QGridLayout *layoutWhite;
+    QGridLayout *layoutBlack;
     bool whiteTurn;
     bool blackTurn;
     bool isGreenHere;     // ОТВЕЧАЕТ ЗА ПРИСУТСТВИЕ ЗЕЛЕНОГО ЦВЕТА НА ДОСКЕ
@@ -95,6 +97,8 @@ private:
     QPushButton *back;
     int whiteRow;
     int whiteColumn;
+    int blackRow;
+    int blackColumn;
     //--------------------------------------------------------------------------------------------------------------------
 
     // ###################################################################################################################
