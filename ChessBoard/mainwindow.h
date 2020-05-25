@@ -12,6 +12,7 @@
 #include "container.h"
 #include "menu.h"
 #include <QGridLayout>
+#include "figureturn.h"
 
 // ТУТ НИЧЕГО НЕ ТРОГАЛ
 
@@ -26,7 +27,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *menu, QWidget *parent = nullptr);
     ~MainWindow();
-private:
     Ui::MainWindow *ui;
     Cell *cells[8][8];     // ПУСТОЙ МАССИВ ОБЪЕКТОВ КЛАССА CELLS, В КОТОРОМ ЕСТЬ САМА КНОПКА
 

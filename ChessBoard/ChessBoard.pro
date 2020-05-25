@@ -18,15 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     cell.cpp \
     container.cpp \
+    figureturn.cpp \
     main.cpp \
     mainwindow.cpp \
-    menu.cpp
+    menu.cpp \
+    queen.cpp
 
 HEADERS += \
     cell.h \
     container.h \
+    figureturn.h \
     mainwindow.h \
-    menu.h
+    menu.h \
+    queen.h
 
 FORMS += \
     mainwindow.ui \

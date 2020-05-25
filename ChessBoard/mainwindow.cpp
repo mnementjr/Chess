@@ -254,10 +254,14 @@ void MainWindow::changeImage(int ID){      // ОСНОВНОЙ СЛОТ, ГДЕ 
                             blackPawnTurn(i, n);
                         }
                         else if(whichFigureClicked == "white_queen_peach" || whichFigureClicked == "white_queen_maroon"){
-                            anyQueenTurn(i, n);
+                            FigureTurn turn;
+                            turn.TurnFigure(i, n);
+                            //anyQueenTurn(i, n);
                         }
                         else if(whichFigureClicked == "black_queen_peach" || whichFigureClicked == "black_queen_maroon"){
-                            anyQueenTurn(i, n);
+                            FigureTurn turn;
+                            turn.TurnFigure(i, n);
+                            //anyQueenTurn(i, n);
                         }
 
                         else if(whichFigureClicked == "white_bishop_peach" || whichFigureClicked == "white_bishop_maroon"){
@@ -703,7 +707,7 @@ void MainWindow::pawnSetGreen(int i, int n, int ID, QString whichFigClicked){
 }
 
 
-void MainWindow::anyQueenTurn(int i, int n){
+/*void MainWindow::anyQueenTurn(int i, int n){
     QString name = FigureMemory[0].getNameImage();
     if(cells[i][n]->getNameImage() == "dark_green"){
         for (int j = 0; j < DarkGreenMemory.length(); j++) {
@@ -805,7 +809,7 @@ void MainWindow::anyQueenTurn(int i, int n){
         labelSetWhiteTurn();
     }
     FigureMemory.clear();
-}
+}*/
 void MainWindow::queenSetGreen(int i, int n, QString whichFigClicked){
     int x = i;
     int j = n;
